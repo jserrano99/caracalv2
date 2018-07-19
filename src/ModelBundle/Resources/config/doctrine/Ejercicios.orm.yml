@@ -1,0 +1,49 @@
+ModelBundle\Entity\Ejercicios:
+    type: entity
+    table: ejercicios
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        fcini:
+            type: date
+            nullable: true
+        fcfin:
+            type: date
+            nullable: true
+        estado:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        asientoAperturaId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: asiento_apertura_id
+        asientoRegularizacionId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: asiento_regularizacion_id
+        asientoCierreId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: asiento_cierre_id
+    lifecycleCallbacks: {  }

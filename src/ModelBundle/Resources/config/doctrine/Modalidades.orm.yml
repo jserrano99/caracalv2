@@ -1,0 +1,26 @@
+ModelBundle\Entity\Modalidades:
+    type: entity
+    table: modalidades
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cd:
+            type: string
+            nullable: false
+            length: 3
+            options:
+                fixed: false
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

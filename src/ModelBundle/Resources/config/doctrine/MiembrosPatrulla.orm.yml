@@ -1,0 +1,41 @@
+ModelBundle\Entity\MiembrosPatrulla:
+    type: entity
+    table: miembros_patrulla
+    indexes:
+        idx_participante:
+            columns:
+                - participante_ronda_id
+        idx_patrulla:
+            columns:
+                - patrulla_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        patrulla:
+            targetEntity: Patrullas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                patrulla_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        participanteRonda:
+            targetEntity: ParticipantesRondas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                participante_ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

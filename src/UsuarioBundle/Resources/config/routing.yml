@@ -1,0 +1,29 @@
+
+queryUsuario:
+    path:   /Usuario/query
+    defaults: { _controller: UsuarioBundle:Usuario:Query}
+addUsuario:
+    path:   /Usuario/add
+    defaults: { _controller: UsuarioBundle:Usuario:Add}
+editUsuario:
+    path:   /Usuario/edit/{id}
+    defaults: { _controller: UsuarioBundle:Usuario:Edit}
+deleteUsuario:
+    path:   /Usuario/delete/{id}
+    defaults: { _controller: UsuarioBundle:Usuario:Delete}
+cambioPassword:
+    path:   /Usuario/cambioPassword/{id}
+    defaults: { _controller: UsuarioBundle:Usuario:CambioPassword}
+
+login:
+    path: /login
+    defaults: { _controller: UsuarioBundle:Usuario:login}
+login_check:
+    path: /login_check
+logout:
+    path: /logout
+
+
+usuario_homepage:
+    path:     /usuario
+    defaults: { _controller: UsuarioBundle:Usuario:index }

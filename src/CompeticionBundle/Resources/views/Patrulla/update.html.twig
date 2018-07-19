@@ -1,0 +1,16 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PATRULLAS: {{Patrulla.ronda.competicion.descripcion}}
+	<br/>
+	{{Patrulla.ronda.descripcion}}
+	<hr/>
+   <a href="{{path("queryPatrulla",{"ronda_id":Patrulla.ronda.id})}}" class="btn btn-success">Volver</a>
+
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

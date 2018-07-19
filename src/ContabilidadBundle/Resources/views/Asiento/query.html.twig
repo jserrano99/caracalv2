@@ -1,0 +1,49 @@
+{% extends "ContabilidadBundle::menu.html.twig" %} 
+{% block titulo %} CONSULTA DE ASIENTOS : Ejercicio {{Ejercicio.descripcion}} 
+    <a href="{{path("queryEjercicio")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    {%include 'ContabilidadBundle::funciones.html.twig'%}
+
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">Número</th>
+                    <th class="text-center text-bold">Fecha</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Importe Debe</th>
+                    <th class="text-center text-bold">Importe Haber</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {% for Asiento in Asientos %}
+                    <tr>
+                        <td class="text-center">{{Asiento.numero}}</td>
+                        <td class="text-center">
+                            <span style="display:none;">{{Asiento.fecha}}</span>{{Asiento.fecha| date('d/m/Y')}}</td>
+                        <td>{{Asiento.descripcion}}</td>
+                        <td class="text-right">{{Asiento.importeDebe|number_format(2,',','.')}} €</td>
+                        <td class="text-right">{{Asiento.importeHaber|number_format(2,',','.')}} €</td>
+                        <td class="text-center">
+                           <a href="{{path("editAsiento",{ "id":Asiento.id, "ejercicio_id":Asiento.ejercicio_id })}}" 
+                              class="btn btn-success">Editar</a>
+                           <a href="{{path("queryApunte",{ "asiento_id":Asiento.id})}}" 
+                              class="btn btn-warning">Apuntes</a>
+                           <input type="button" 
+                                  class="btn btn-danger" value="Eliminar" onClick="EliminarAsiento({{Asiento.id}})">   
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

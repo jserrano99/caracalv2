@@ -1,0 +1,36 @@
+{% extends "GestionBundle::layout.html.twig" %} 
+{% block menu %}
+    <ul class="nav navbar-nav">
+     <li class="active"><a href="{{path("gestion_homepage")}}">Menu Principal</a></li>
+        
+     <li class="dropdown">
+        <a href="#" 
+           class="dropdown-toggle" 
+           data-toggle="dropdown" 
+           role="button" 
+           aria-haspopup="true" 
+           aria-expanded="false">Generales<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="{{path("queryProvincia")}}">Provincias</a></li>
+            <li><a href="{{path("queryLocalidad")}}">Localidades</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Otro</a></li>
+        </ul>
+    </li>
+<li class="dropdown">
+        <a href="#" 
+           class="dropdown-toggle" 
+           data-toggle="dropdown" 
+           role="button" 
+           aria-haspopup="true" 
+           aria-expanded="false">Competiciones<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Opcion 1</a></li>
+            <li><a href="#">Opcion 2</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Parámetros</a></li>
+        </ul>
+
+    </li>
+    </ul>    
+{%endblock%}                                    

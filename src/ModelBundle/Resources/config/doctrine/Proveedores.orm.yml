@@ -1,0 +1,42 @@
+ModelBundle\Entity\Proveedores:
+    type: entity
+    table: proveedores
+    indexes:
+        idCuentaMayor:
+            columns:
+                - cuenta_mayor_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nif:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+            column: NIF
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        cuentaMayor:
+            targetEntity: CuentasMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuenta_mayor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

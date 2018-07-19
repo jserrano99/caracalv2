@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doctrine-mapping xmlns="http://Doctrine-project.org/schemas/orm/Doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://Doctrine-project.org/schemas/orm/Doctrine-mapping http://Doctrine-project.org/schemas/orm/Doctrine-mapping.xsd">
+  <entity name="ModoEstructura" table="modo_estructura">
+    <indexes>
+      <index name="idx_modo" columns="modo_id"/>
+      <index name="idx_modalidad" columns="modalidad_id"/>
+      <index name="idx_categoria" columns="categoria_id"/>
+      <index name="idx_division" columns="division_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="modo" target-entity="Modos" fetch="LAZY">
+      <join-columns>
+        <join-column name="modo_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="division" target-entity="Divisiones" fetch="LAZY">
+      <join-columns>
+        <join-column name="division_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="categoria" target-entity="Categorias" fetch="LAZY">
+      <join-columns>
+        <join-column name="categoria_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="modalidad" target-entity="Modalidades" fetch="LAZY">
+      <join-columns>
+        <join-column name="modalidad_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</Doctrine-mapping>

@@ -1,0 +1,17 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: gestion-caracal
+    database_user: caracal
+    database_password: ~
+    # You should uncomment this if you want to use pdo_sqlite
+    #database_path: '%kernel.project_dir%/var/data/data.sqlite'
+
+    mailer_transport: smtp
+    mailer_host: smtp.1and1.es 
+    mailer_user: caracalfuenlabrada@caracalfuenlabrada.es
+    mailer_password: Caracal@2017
+    secret: 790d3c07f2b08840c69cde2b9331cd78857801f7

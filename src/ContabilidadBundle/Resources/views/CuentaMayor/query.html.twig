@@ -1,0 +1,40 @@
+{% extends "ContabilidadBundle::menu.html.twig" %} 
+{% block titulo %} CONSULTA DE CUENTAS DE MAYOR  {% endblock %}
+{% block contenido %}
+    {%include 'ContabilidadBundle::funciones.html.twig'%}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addCuentaMayor")}}" class="btn btn-success">Nueva Cuenta de Mayor</a>
+        <hr/>
+        
+        <table class="tabla table table-condensed" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Código</th>
+                    <th class="text-center text-bold ">Descripción</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for CuentaMayor in CuentasMayor %}
+                    <tr>
+                        <td class="text-center">{{CuentaMayor.id}}</td>
+                        <td class="text-center">{{CuentaMayor.codigo}}</td>
+                        <td>{{CuentaMayor.descripcion}}</td>
+                        <td class="text-center">
+                            <a href="{{path("editCuentaMayor",{ "id":CuentaMayor.id })}}" 
+                              class="btn btn-warning">Editar</a>
+                            <a href="{{path("apuntesCuentaMayor",{ "id":CuentaMayor.id })}}" 
+                              target="_blank" class="btn btn-info">Apuntes</a>
+                        </td>
+                    </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+ModelBundle\Entity\Patrullas:
+    type: entity
+    table: patrullas
+    indexes:
+        idx_ronda:
+            columns:
+                - ronda_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        ronda:
+            targetEntity: Rondas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

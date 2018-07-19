@@ -1,0 +1,67 @@
+ModelBundle\Entity\ModoEstructura:
+    type: entity
+    table: modo_estructura
+    indexes:
+        idx_modo:
+            columns:
+                - modo_id
+        idx_modalidad:
+            columns:
+                - modalidad_id
+        idx_categoria:
+            columns:
+                - categoria_id
+        idx_division:
+            columns:
+                - division_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        modo:
+            targetEntity: Modos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                modo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        division:
+            targetEntity: Divisiones
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                division_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        categoria:
+            targetEntity: Categorias
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categoria_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        modalidad:
+            targetEntity: Modalidades
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                modalidad_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

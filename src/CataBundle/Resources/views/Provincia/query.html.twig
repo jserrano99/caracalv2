@@ -1,0 +1,35 @@
+{% extends "CataBundle::menu.html.twig" %} 
+{% block titulo %} CATÁLOGO DE PROVINCIAS{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addProvincia")}}" class="btn btn-success">Nueva Provincia</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Provincia in Provincias %}
+                    <tr>
+                        <td class="text-center">{{Provincia.id}}</td>
+                        <td>{{Provincia.descripcion}}</td>
+                        <td class="text-center">
+                           <a href="{{path("editProvincia",{ "id":Provincia.id })}}" class="btn btn-success">Editar</a>
+                           <a href="{{path("deleteProvincia",{ "id":Provincia.id })}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

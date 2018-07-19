@@ -1,0 +1,42 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE SOCIOS ** CONSULTA{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addSocio")}}" class="btn btn-success">Nuevo Socio</a>
+        <a href="{{path("exportarSocio",{"estado":'TODO'})}}" class="btn btn-info">Exporta TODO</a>
+        <a href="{{path("exportarSocio",{"estado":'ACTIVO'})}}" class="btn btn-warning">Exporta ACTIVOS</a>
+        <a href="{{path("exportarSocio",{"estado":'BAJA'})}}" class="btn btn-danger">Exporta BAJA</a>
+        <hr/>
+
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Nº Socio</th>
+                    <th class="text-center text-bold">Nombre</th>
+                    <th class="text-center text-bold">Edad</th>
+                    <th class="text-center text-bold">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Socio in Socios %}
+                    <tr>
+                        <td class="text-center">
+                            <a href="{{path("editSocio",{ "id":Socio.id })}}">{{Socio.id}}</a></td>
+                        <td class="text-center">{{Socio.nmsocio}}</td>
+                        <td>
+                            <a href="{{path("editPersona",{ "id":Socio.persona.id })}}">{{Socio.persona.apenom}}</a>
+                        </td>
+                        <td class="text-center">{{Socio.persona.edad}}</td>
+                        <td class="text-center">{{Socio.estado}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

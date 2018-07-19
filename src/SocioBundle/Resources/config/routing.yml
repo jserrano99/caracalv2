@@ -1,0 +1,20 @@
+addSocio:
+    path:   /Socio/add
+    defaults: { _controller: SocioBundle:Socio:Add}
+querySocio:
+    path:   /Socio/query
+    defaults: { _controller: SocioBundle:Socio:Query}
+editSocio:
+    path:   /Socio/edit/{id}
+    defaults: { _controller: SocioBundle:Socio:Edit}
+deleteSocio:
+    path:   /Socio/delete/{id}
+    defaults: { _controller: SocioBundle:Socio:Delete}
+
+exportarSocio:
+    path:   /Socio/exportar/{estado}
+    defaults: { _controller: SocioBundle:Socio:exportar}
+
+socio_homepage:
+    path:     /socio
+    defaults: { _controller: SocioBundle:Socio:index }

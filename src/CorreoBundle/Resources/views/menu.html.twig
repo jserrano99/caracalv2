@@ -1,0 +1,9 @@
+{% extends "GestionBundle::layout.html.twig" %} 
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path("gestion_homepage")}}">Menu Principal</a></li>
+        <li><a href="{{path("queryCorreo")}}">Consulta</a></li>
+        <li><a href="{{path("addCorreo")}}">Nuevo Correo</a></li>
+        <li><a href="{{path("queryPersona")}}" target="_blank">Gestión Personas</a></li>
+    </ul>    
+{%endblock%}                                    

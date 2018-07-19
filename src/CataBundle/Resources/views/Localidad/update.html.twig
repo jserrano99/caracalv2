@@ -1,0 +1,12 @@
+{% extends "CataBundle::menu.html.twig" %} 
+{% block titulo %} CATÁLOGO DE LOCALIDADES: MODIFICACIÓN 
+   <a href="{{path("queryLocalidad")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doctrine-mapping xmlns="http://Doctrine-project.org/schemas/orm/Doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://Doctrine-project.org/schemas/orm/Doctrine-mapping http://Doctrine-project.org/schemas/orm/Doctrine-mapping.xsd">
+  <entity name="EstrBalance" table="estr_balance">
+    <indexes>
+      <index name="idx_cuenta_mayor" columns="cuenta_mayor_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nivel0" type="integer" column="nivel0" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nivel1" type="integer" column="nivel1" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nivel2" type="integer" column="nivel2" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nivel3" type="integer" column="nivel3" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nivel4" type="integer" column="nivel4" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="multiplicador" type="integer" column="multiplicador" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="cuentaMayor" target-entity="CuentasMayor" fetch="LAZY">
+      <join-columns>
+        <join-column name="cuenta_mayor_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</Doctrine-mapping>

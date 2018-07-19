@@ -1,0 +1,81 @@
+ContabilidadBundle\Entity\AsientoFactura:
+    type: entity
+    table: asiento_factura
+    repositoryClass: ContabilidadBundle\Repository\AsientoFacturaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        numero:
+            type: string
+            length: 255
+        serie:
+            type: string
+            length: 255
+        fecha:
+            type: date
+        descripcion:
+            type: string
+            length: 255
+        observaciones:
+            type: string
+            length: 255
+        importe:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        importeBase:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: importe_base
+        cuotaIva:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: cuota_iva
+        importeFactura:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: importe_factura
+    manyToOne:
+        proyecto:
+            targetEntity: Proyecto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                proyecto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cuentaPago:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuentaPago_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cuentaGasto:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuentaGasto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+       
+    lifecycleCallbacks: {  }

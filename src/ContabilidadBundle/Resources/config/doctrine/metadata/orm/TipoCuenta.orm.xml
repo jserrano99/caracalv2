@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doctrine-mapping xmlns="http://Doctrine-project.org/schemas/orm/Doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://Doctrine-project.org/schemas/orm/Doctrine-mapping http://Doctrine-project.org/schemas/orm/Doctrine-mapping.xsd">
+  <entity name="TipoCuenta" table="tipos_cuenta">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="descripcion" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</Doctrine-mapping>

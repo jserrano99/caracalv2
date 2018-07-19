@@ -1,0 +1,18 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE SOCIOS: {{Socio.persona.nomape}}
+	<hr/>
+	
+   <a href="{{path("querySocio")}}" class="btn btn-success">Volver</a>
+   <a href="{{path("editPersona",{"id":Socio.persona.id})}}" target="_blank" class="btn btn-success">Datos Personles</a>
+	  
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+		{{form_start(form, { 'enctype':'multipart/form-data' })}}
+			<img width="130" height="150" src="{{ asset("fotosSocio/"~Socio.foto)}}"/>
+            {{form_widget(form.foto)}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

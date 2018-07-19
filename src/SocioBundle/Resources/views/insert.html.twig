@@ -1,0 +1,17 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE SOCIOS: NUEVO SOCIO
+<a href="{{path("addPersona")}}" target="_blank" class="btn btn-success">Nueva Persona</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

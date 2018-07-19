@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MySql" id="Project_38411f2" template="Default" database="MySql" >
+	<schema name="gestion-caracal" catalogname="gestion-caracal" >
+		<table name="activos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="inventario" type="int" length="10" decimal="0" jt="4" />
+			<column name="fcadquision" type="date" length="10" decimal="0" jt="91" />
+			<column name="importe-compra" type="double" length="22" decimal="0" jt="8" />
+			<column name="importe-amortizado" type="double" length="22" decimal="0" jt="8" />
+		</table>
+		<table name="adjuntos" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="correo_id" type="int" jt="4" mandatory="y" />
+			<column name="fichero" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" jt="12" />
+			<index name="pk_adjuntos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_adjuntos" unique="NORMAL" >
+				<column name="correo_id" />
+			</index>
+			<fk name="fk_adjuntos_correo" to_schema="gestion-caracal" to_table="correos" delete_action="cascade" update_action="cascade" >
+				<fk_column name="correo_id" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="apuntes" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="numero" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="cuenta_debe_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="importe_debe" type="double" length="22" decimal="0" jt="8" />
+			<column name="cuenta_haber_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="importe_haber" type="double" length="22" decimal="0" jt="8" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="observaciones" type="mediumtext" length="16777215" decimal="0" jt="-1" />
+			<column name="asiento_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_apuntes" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_asiento" unique="NORMAL" >
+				<column name="asiento_id" />
+			</index>
+			<index name="idx_cuenta_debe" unique="NORMAL" >
+				<column name="cuenta_debe_id" />
+			</index>
+			<index name="idx_cuenta_haber" unique="NORMAL" >
+				<column name="cuenta_haber_id" />
+			</index>
+			<fk name="apuntes_ibfk_1" to_schema="gestion-caracal" to_table="asientos" delete_action="cascade" update_action="cascade" >
+				<fk_column name="asiento_id" pk="id" />
+			</fk>
+			<fk name="apuntes_ibfk_2" to_schema="gestion-caracal" to_table="cuentas_mayor" update_action="setNull" >
+				<fk_column name="cuenta_debe_id" pk="id" />
+			</fk>
+			<fk name="apuntes_ibfk_3" to_schema="gestion-caracal" to_table="cuentas_mayor" update_action="setNull" >
+				<fk_column name="cuenta_haber_id" pk="id" />
+			</fk>
+		</table>
+		<table name="arqueros" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="licencia" type="varchar" length="15" decimal="0" jt="12" />
+			<column name="club_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="categoria_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="persona_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_arqueros" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_arqueros_persona_id" unique="UNIQUE" >
+				<column name="persona_id" />
+			</index>
+			<index name="idx_categoria" unique="NORMAL" >
+				<column name="categoria_id" />
+			</index>
+			<index name="idx_club" unique="NORMAL" >
+				<column name="club_id" />
+			</index>
+			<fk name="fk_arqueros_categorias" to_schema="gestion-caracal" to_table="categorias" >
+				<fk_column name="categoria_id" pk="id" />
+			</fk>
+			<fk name="fk_arqueros_club" to_schema="gestion-caracal" to_table="club" >
+				<fk_column name="club_id" pk="id" />
+			</fk>
+			<fk name="fk_arqueros_personas" to_schema="gestion-caracal" to_table="personas" >
+				<fk_column name="persona_id" pk="id" />
+			</fk>
+		</table>
+		<table name="asiento_factura" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="numero" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="serie" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="fecha" type="date" length="10" decimal="0" jt="91" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="observaciones" type="text" length="65535" decimal="0" jt="-1" />
+			<column name="importe_base" type="double" length="22" decimal="0" jt="8" />
+			<column name="cuota_iva" type="double" length="22" decimal="0" jt="8" />
+			<column name="importe_factura" type="double" length="22" decimal="0" jt="8" />
+			<column name="proveedor_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="cuenta_pago_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="cuenta_gastos_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="proyecto_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_asiento_factura" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_cuenta_gastos" unique="NORMAL" >
+				<column name="cuenta_gastos_id" />
+			</index>
+			<index name="idx_cuenta_pago" unique="NORMAL" >
+				<column name="cuenta_pago_id" />
+			</index>
+			<index name="idx_proveedor" unique="NORMAL" >
+				<column name="proveedor_id" />
+			</index>
+			<index name="idx_proyecto" unique="NORMAL" >
+				<column name="proyecto_id" />
+			</index>
+		</table>
+		<table name="asientos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="numero" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="fecha" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="proyecto_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="observaciones" type="mediumtext" length="16777215" decimal="0" jt="-1" />
+			<column name="importe_debe" type="double" length="22" decimal="0" jt="8" />
+			<column name="importe_haber" type="double" length="22" decimal="0" jt="8" />
+			<index name="pk_asientos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="balance" >
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="nivel0" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel1" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel2" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel3" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel4" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="cuenta_mayor" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="importe_debe" type="double" length="22" decimal="0" jt="8" />
+			<column name="importe_haber" type="double" length="22" decimal="0" jt="8" />
+			<column name="multiplicador" type="int" length="10" decimal="0" jt="4" />
+			<index name="idx_ejercicio" unique="NORMAL" >
+				<column name="ejercicio_id" />
+			</index>
+			<fk name="balance_ibfk_1" to_schema="gestion-caracal" to_table="ejercicios" >
+				<fk_column name="ejercicio_id" pk="id" />
+			</fk>
+		</table>
+		<table name="categorias" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="codigo" type="varchar" length="2" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="edad_desde" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="edad_hasta" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_categorias" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="clasificaciones" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="competicion_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="participante_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="modalidad_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="categoria_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="total_puntos" type="int" length="10" decimal="0" jt="4" />
+			<column name="total_onces" type="int" length="10" decimal="0" jt="4" />
+			<column name="total_dieces" type="int" length="10" decimal="0" jt="4" />
+			<column name="menor" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_clasificaciones" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_categoria" unique="NORMAL" >
+				<column name="categoria_id" />
+			</index>
+			<index name="idx_competicion" unique="NORMAL" >
+				<column name="competicion_id" />
+			</index>
+			<index name="idx_modalidad" unique="NORMAL" >
+				<column name="modalidad_id" />
+			</index>
+			<index name="idx_participante" unique="NORMAL" >
+				<column name="participante_id" />
+			</index>
+			<fk name="clasificaciones_ibfk_4" to_schema="gestion-caracal" to_table="categorias" >
+				<fk_column name="categoria_id" pk="id" />
+			</fk>
+			<fk name="clasificaciones_ibfk_1" to_schema="gestion-caracal" to_table="competiciones" delete_action="cascade" update_action="cascade" >
+				<fk_column name="competicion_id" pk="id" />
+			</fk>
+			<fk name="clasificaciones_ibfk_3" to_schema="gestion-caracal" to_table="modalidades" >
+				<fk_column name="modalidad_id" pk="id" />
+			</fk>
+			<fk name="clasificaciones_ibfk_2" to_schema="gestion-caracal" to_table="participantes" delete_action="cascade" update_action="cascade" >
+				<fk_column name="participante_id" pk="id" />
+			</fk>
+		</table>
+		<table name="clasificaciones_rondas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="clasificacion_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="puntos" type="int" length="10" decimal="0" jt="4" />
+			<column name="onces" type="int" length="10" decimal="0" jt="4" />
+			<column name="dieces" type="int" length="10" decimal="0" jt="4" />
+			<column name="ronda_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_clasificaciones_rondas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_clasificacion" unique="NORMAL" >
+				<column name="clasificacion_id" />
+			</index>
+			<index name="idx_ronda" unique="NORMAL" >
+				<column name="ronda_id" />
+			</index>
+			<fk name="clasificaciones_rondas_ibfk_1" to_schema="gestion-caracal" to_table="clasificaciones" delete_action="cascade" update_action="cascade" >
+				<fk_column name="clasificacion_id" pk="id" />
+			</fk>
+			<fk name="clasificaciones_rondas_ibfk_2" to_schema="gestion-caracal" to_table="rondas" delete_action="cascade" update_action="cascade" >
+				<fk_column name="ronda_id" pk="id" />
+			</fk>
+		</table>
+		<table name="club" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="federacion_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_club" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_federacion" unique="NORMAL" >
+				<column name="federacion_id" />
+			</index>
+			<fk name="club_ibfk_1" to_schema="gestion-caracal" to_table="federaciones" delete_action="setNull" update_action="setNull" >
+				<fk_column name="federacion_id" pk="id" />
+			</fk>
+		</table>
+		<table name="competiciones" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fecha" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="modo_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="tipo_competicion_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="descontar" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_competiciones" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_modo" unique="NORMAL" >
+				<column name="modo_id" />
+			</index>
+			<index name="idx_tipo_competicion" unique="NORMAL" >
+				<column name="tipo_competicion_id" />
+			</index>
+			<fk name="competiciones_ibfk_1" to_schema="gestion-caracal" to_table="modos" delete_action="setNull" update_action="setNull" >
+				<fk_column name="modo_id" pk="id" />
+			</fk>
+			<fk name="competiciones_ibfk_2" to_schema="gestion-caracal" to_table="tipos_competicion" delete_action="setNull" update_action="setNull" >
+				<fk_column name="tipo_competicion_id" pk="id" />
+			</fk>
+		</table>
+		<table name="competiciones_imagenes" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="competicion_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="imagen" type="mediumblob" length="16777215" decimal="0" jt="-4" mandatory="y" />
+			<column name="tipo" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_competiciones_imagenes" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_competicion" unique="NORMAL" >
+				<column name="competicion_id" />
+			</index>
+			<fk name="competiciones_imagenes_ibfk_1" to_schema="gestion-caracal" to_table="competiciones" delete_action="cascade" update_action="cascade" >
+				<fk_column name="competicion_id" pk="id" />
+			</fk>
+		</table>
+		<table name="correos" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="asunto" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="cuerpo" type="text" jt="-1" />
+			<column name="fecha" type="date" jt="91" />
+			<column name="estado_correo_id" type="int" jt="4" />
+			<index name="pk_correo" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_correos" unique="NORMAL" >
+				<column name="estado_correo_id" />
+			</index>
+			<fk name="fk_correos_estado_correo" to_schema="gestion-caracal" to_table="estado_correo" >
+				<fk_column name="estado_correo_id" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="cuenta_resultados" >
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="nivel1" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel2" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nivel3" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="cuenta_mayor" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="importe_debe" type="double" length="22" decimal="0" jt="8" />
+			<column name="importe_haber" type="double" length="22" decimal="0" jt="8" />
+			<column name="multiplicador" type="int" length="10" decimal="0" jt="4" />
+			<index name="idx_ejercicio" unique="NORMAL" >
+				<column name="ejercicio_id" />
+			</index>
+		</table>
+		<table name="cuentas_mayor" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="codigo" type="varchar" length="9" decimal="0" jt="12" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="grupo_cuentas_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="tipo_cuenta_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_cuentas_mayor" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="grupo_cuentas_id" unique="NORMAL" >
+				<column name="grupo_cuentas_id" />
+			</index>
+			<index name="tipo_cuenta_id" unique="NORMAL" >
+				<column name="tipo_cuenta_id" />
+			</index>
+			<fk name="cuentas_mayor_ibfk_1" to_schema="gestion-caracal" to_table="grupo_cuentas" >
+				<fk_column name="grupo_cuentas_id" pk="id" />
+			</fk>
+			<fk name="cuentas_mayor_ibfk_2" to_schema="gestion-caracal" to_table="tipos_cuenta" >
+				<fk_column name="tipo_cuenta_id" pk="id" />
+			</fk>
+		</table>
+		<table name="destinatarios" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="correo_id" type="int" jt="4" mandatory="y" />
+			<column name="persona_id" type="int" jt="4" mandatory="y" />
+			<index name="pk_destinatarios" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_destinatarios_correo" unique="NORMAL" >
+				<column name="correo_id" />
+			</index>
+			<index name="idx_destinatarios_socios" unique="NORMAL" >
+				<column name="persona_id" />
+			</index>
+			<fk name="fk_destinatarios_correo" to_schema="gestion-caracal" to_table="correos" delete_action="cascade" update_action="cascade" >
+				<fk_column name="correo_id" pk="id" />
+			</fk>
+			<fk name="fk_destinatarios_personas" to_schema="gestion-caracal" to_table="personas" >
+				<fk_column name="persona_id" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="divisiones" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="ejercicio_actual" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_ejercicio_actual" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="ejercicio_id" unique="UNIQUE" >
+				<column name="ejercicio_id" />
+			</index>
+			<fk name="ejercicio_actual_ibfk_1" to_schema="gestion-caracal" to_table="ejercicios" delete_action="setNull" update_action="setNull" >
+				<fk_column name="ejercicio_id" pk="id" />
+			</fk>
+		</table>
+		<table name="ejercicios" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="fcini" type="date" length="10" decimal="0" jt="91" />
+			<column name="fcfin" type="date" length="10" decimal="0" jt="91" />
+			<column name="estado_ejercicio_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="asiento_apertura_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="asiento_regularizacion_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="asiento_cierre_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="sig_ejercicio_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="ant_ejercicio_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_ejercicios" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_asiento_apertura" unique="NORMAL" >
+				<column name="asiento_apertura_id" />
+			</index>
+			<index name="idx_asiento_cierre" unique="NORMAL" >
+				<column name="asiento_cierre_id" />
+			</index>
+			<index name="idx_asiento_regularizacion" unique="NORMAL" >
+				<column name="asiento_regularizacion_id" />
+			</index>
+			<index name="idx_estado_ejercicio" unique="NORMAL" >
+				<column name="estado_ejercicio_id" />
+			</index>
+			<fk name="ejercicios_ibfk_1" to_schema="gestion-caracal" to_table="asientos" delete_action="setNull" update_action="setNull" >
+				<fk_column name="asiento_apertura_id" pk="id" />
+			</fk>
+			<fk name="ejercicios_ibfk_2" to_schema="gestion-caracal" to_table="asientos" >
+				<fk_column name="asiento_regularizacion_id" pk="id" />
+			</fk>
+			<fk name="ejercicios_ibfk_3" to_schema="gestion-caracal" to_table="asientos" >
+				<fk_column name="asiento_cierre_id" pk="id" />
+			</fk>
+			<fk name="ejercicios_ibfk_4" to_schema="gestion-caracal" to_table="estados_ejercicio" delete_action="setNull" update_action="setNull" >
+				<fk_column name="estado_ejercicio_id" pk="id" />
+			</fk>
+		</table>
+		<table name="estado_correo" >
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="estado" type="varchar" length="255" jt="12" />
+			<index name="pk_estado_correo" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="estados" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_estados" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="estados_ejercicio" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_estados_ejercicio" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="estados_usuario" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_estados_usuario" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="estr_balance" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nivel0" type="int" length="10" decimal="0" jt="4" />
+			<column name="nivel1" type="int" length="10" decimal="0" jt="4" />
+			<column name="nivel2" type="int" length="10" decimal="0" jt="4" />
+			<column name="nivel3" type="int" length="10" decimal="0" jt="4" />
+			<column name="nivel4" type="int" length="10" decimal="0" jt="4" />
+			<column name="cuenta_mayor_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="multiplicador" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_estr_balance" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_cuenta_mayor" unique="NORMAL" >
+				<column name="cuenta_mayor_id" />
+			</index>
+			<index name="idx_nivel_0" unique="NORMAL" >
+				<column name="nivel0" />
+			</index>
+			<index name="idx_nivel_1" unique="NORMAL" >
+				<column name="nivel1" />
+			</index>
+			<index name="idx_nivel_2" unique="NORMAL" >
+				<column name="nivel2" />
+			</index>
+			<index name="idx_nivel_3" unique="NORMAL" >
+				<column name="nivel3" />
+			</index>
+			<index name="idx_nivel_4" unique="NORMAL" >
+				<column name="nivel4" />
+			</index>
+			<fk name="estr_balance_ibfk_5" to_schema="gestion-caracal" to_table="cuentas_mayor" >
+				<fk_column name="cuenta_mayor_id" pk="id" />
+			</fk>
+			<fk name="estr_balance_ibfk_1" to_schema="gestion-caracal" to_table="niveles_balance" >
+				<fk_column name="nivel0" pk="id" />
+			</fk>
+			<fk name="estr_balance_ibfk_2" to_schema="gestion-caracal" to_table="niveles_balance" >
+				<fk_column name="nivel1" pk="id" />
+			</fk>
+			<fk name="estr_balance_ibfk_3" to_schema="gestion-caracal" to_table="niveles_balance" >
+				<fk_column name="nivel3" pk="id" />
+			</fk>
+			<fk name="estr_balance_ibfk_4" to_schema="gestion-caracal" to_table="niveles_balance" >
+				<fk_column name="nivel4" pk="id" />
+			</fk>
+		</table>
+		<table name="estr_cuenta_resultados" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="nivel1" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="nivel2" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="nivel3" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="cuenta_mayor_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="multiplicador" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_estr_cuenta_resultados" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<index name="cuenta_mayor_id" unique="NORMAL" >
+				<column name="cuenta_mayor_id" />
+			</index>
+			<fk name="estr_cuenta_resultados_ibfk_1" to_schema="gestion-caracal" to_table="cuentas_mayor" >
+				<fk_column name="cuenta_mayor_id" pk="id" />
+			</fk>
+		</table>
+		<table name="eventos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="tipo_evento" type="varchar" length="255" decimal="0" jt="12" />
+		</table>
+		<table name="federaciones" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_federaciones" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="grupo_cuentas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_grupo_cuentas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="imagenes" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="imagen" type="mediumblob" length="16777215" decimal="0" jt="-4" mandatory="y" />
+		</table>
+		<table name="localidades" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="provincia_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="cd" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_localidades" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_provincia" unique="NORMAL" >
+				<column name="provincia_id" />
+			</index>
+			<fk name="localidades_ibfk_1" to_schema="gestion-caracal" to_table="provincias" delete_action="cascade" update_action="cascade" >
+				<fk_column name="provincia_id" pk="id" />
+			</fk>
+		</table>
+		<table name="miembros_patrulla" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="patrulla_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="parti_ronda_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_miembros_patrulla" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_parti_ronda" unique="NORMAL" >
+				<column name="parti_ronda_id" />
+			</index>
+			<index name="idx_patrulla" unique="NORMAL" >
+				<column name="patrulla_id" />
+			</index>
+			<fk name="miembros_patrulla_ibfk_2" to_schema="gestion-caracal" to_table="participantes_rondas" delete_action="cascade" update_action="cascade" >
+				<fk_column name="parti_ronda_id" pk="id" />
+			</fk>
+			<fk name="miembros_patrulla_ibfk_3" to_schema="gestion-caracal" to_table="patrullas" delete_action="cascade" update_action="cascade" >
+				<fk_column name="patrulla_id" pk="id" />
+			</fk>
+		</table>
+		<table name="modalidades" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="cd" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_modalidades" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="modo_estructura" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="modo_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="division_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="categoria_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="modalidad_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_modo_estructura" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="categoria_id" unique="NORMAL" >
+				<column name="categoria_id" />
+			</index>
+			<index name="division_id" unique="NORMAL" >
+				<column name="division_id" />
+			</index>
+			<index name="idx_modo" unique="NORMAL" >
+				<column name="modo_id" />
+			</index>
+			<index name="modalidad_id" unique="NORMAL" >
+				<column name="modalidad_id" />
+			</index>
+		</table>
+		<table name="modos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_modos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="niveles_balance" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="nivel_balance" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_niveles_balance" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="origen_ingresos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="cuenta_mayor_id" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="participantes" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="competicion_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="modalidad_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="dorsal" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="arquero_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_participantes" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_arquero" unique="NORMAL" >
+				<column name="arquero_id" />
+			</index>
+			<index name="idx_competicion" unique="NORMAL" >
+				<column name="competicion_id" />
+			</index>
+			<index name="idx_modalidad" unique="NORMAL" >
+				<column name="modalidad_id" />
+			</index>
+			<fk name="participantes_ibfk_1" to_schema="gestion-caracal" to_table="competiciones" >
+				<fk_column name="competicion_id" pk="id" />
+			</fk>
+			<fk name="participantes_ibfk_2" to_schema="gestion-caracal" to_table="modalidades" >
+				<fk_column name="modalidad_id" pk="id" />
+			</fk>
+		</table>
+		<table name="participantes_rondas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="ronda_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="participante_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="inscrito" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="pagado" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="puntos" type="int" length="10" decimal="0" jt="4" />
+			<column name="onces" type="int" length="10" decimal="0" jt="4" />
+			<column name="dieces" type="int" length="10" decimal="0" jt="4" />
+			<column name="presentado" type="smallint" length="5" decimal="0" jt="5" />
+			<index name="pk_participantes_rondas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_participante" unique="NORMAL" >
+				<column name="participante_id" />
+			</index>
+			<index name="idx_ronda" unique="NORMAL" >
+				<column name="ronda_id" />
+			</index>
+			<fk name="participantes_rondas_ibfk_3" to_schema="gestion-caracal" to_table="participantes" delete_action="cascade" update_action="cascade" >
+				<fk_column name="participante_id" pk="id" />
+			</fk>
+			<fk name="participantes_rondas_ibfk_2" to_schema="gestion-caracal" to_table="rondas" delete_action="cascade" update_action="cascade" >
+				<fk_column name="ronda_id" pk="id" />
+			</fk>
+		</table>
+		<table name="patrullas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="ronda_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="numero" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_patrullas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_ronda" unique="NORMAL" >
+				<column name="ronda_id" />
+			</index>
+			<fk name="patrullas_ibfk_1" to_schema="gestion-caracal" to_table="rondas" delete_action="cascade" update_action="cascade" >
+				<fk_column name="ronda_id" pk="id" />
+			</fk>
+		</table>
+		<table name="personas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nif" type="varchar" length="9" decimal="0" jt="12" mandatory="y" />
+			<column name="nombre" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="apellido1" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="apellido2" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="fcnac" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="email" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="domicilio" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="cdpostal" type="varchar" length="5" decimal="0" jt="12" />
+			<column name="localidad_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="provincia_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="movil" type="varchar" length="9" decimal="0" jt="12" />
+			<column name="telefono" type="varchar" length="10" decimal="0" jt="12" />
+			<index name="pk_personas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_localidad" unique="NORMAL" >
+				<column name="localidad_id" />
+			</index>
+			<index name="idx_provincia" unique="NORMAL" >
+				<column name="provincia_id" />
+			</index>
+			<fk name="personas_ibfk_2" to_schema="gestion-caracal" to_table="localidades" >
+				<fk_column name="localidad_id" pk="id" />
+			</fk>
+			<fk name="personas_ibfk_1" to_schema="gestion-caracal" to_table="provincias" >
+				<fk_column name="provincia_id" pk="id" />
+			</fk>
+		</table>
+		<table name="proveedores" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="cuenta_mayor_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="NIF" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_proveedores" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_cuenta_mayor" unique="NORMAL" >
+				<column name="cuenta_mayor_id" />
+			</index>
+			<fk name="xx" to_schema="gestion-caracal" to_table="cuentas_mayor" delete_action="setNull" >
+				<fk_column name="cuenta_mayor_id" pk="id" />
+			</fk>
+		</table>
+		<table name="provincias" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_provincias" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="proyectos" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_proyectos" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_proyectos_ejercicio_id" unique="NORMAL" >
+				<column name="ejercicio_id" />
+			</index>
+			<fk name="fk_proyectos_ejercicios" to_schema="gestion-caracal" to_table="ejercicios" >
+				<fk_column name="ejercicio_id" pk="id" />
+			</fk>
+		</table>
+		<table name="rondas" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fecha" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="num" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="competicion_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="activa" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_rondas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_competicion" unique="NORMAL" >
+				<column name="competicion_id" />
+			</index>
+		</table>
+		<table name="saldos" >
+			<column name="ejercicio_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="cuenta_mayor" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="importe_debe" type="double" length="22" decimal="0" jt="8" mandatory="y" />
+			<column name="importe_haber" type="double" length="22" decimal="0" jt="8" mandatory="y" />
+		</table>
+		<table name="socios" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nmsocio" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="licencia_monitor" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="numero_licencia" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="fcalta" type="date" length="10" decimal="0" jt="91" />
+			<column name="fcbaja" type="date" length="10" decimal="0" jt="91" />
+			<column name="observaciones" type="mediumtext" length="16777215" decimal="0" jt="-1" />
+			<column name="estado_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="persona_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foto" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_socios" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="persona_id" unique="UNIQUE" >
+				<column name="persona_id" />
+			</index>
+			<index name="estado_id" unique="NORMAL" >
+				<column name="estado_id" />
+			</index>
+			<fk name="socios_ibfk_1" to_schema="gestion-caracal" to_table="estados" >
+				<fk_column name="estado_id" pk="id" />
+			</fk>
+			<fk name="fk_socios_personas" to_schema="gestion-caracal" to_table="personas" >
+				<fk_column name="persona_id" pk="id" />
+			</fk>
+		</table>
+		<table name="socios_foto" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="socio_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foto" type="mediumblob" length="16777215" decimal="0" jt="-4" mandatory="y" />
+			<column name="tipo" type="varchar" length="30" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_socios_foto" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_socio" unique="NORMAL" >
+				<column name="socio_id" />
+			</index>
+			<fk name="socios_foto_ibfk_1" to_schema="gestion-caracal" to_table="socios" delete_action="cascade" update_action="cascade" >
+				<fk_column name="socio_id" pk="id" />
+			</fk>
+		</table>
+		<table name="tipos_asiento" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="url" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_tipos_asiento" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="tipos_competicion" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_tipos_competicion" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="tipos_cuenta" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_tipos_cuenta" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="usuarios" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="login" type="varchar" length="20" decimal="0" jt="12" mandatory="y" />
+			<column name="nombre" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="perfil" type="varchar" length="25" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="estado" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_usuarios" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="login" unique="UNIQUE" >
+				<column name="login" />
+			</index>
+		</table>
+		<table name="usuarios_conexiones" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="usuario_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="fcconexion" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<column name="ip" type="varchar" length="25" decimal="0" jt="12" />
+			<column name="dsconexion" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_usuarios_conexiones" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_usuario" unique="NORMAL" >
+				<column name="usuario_id" />
+			</index>
+			<fk name="usuarios_conexiones_ibfk_1" to_schema="gestion-caracal" to_table="usuarios" delete_action="cascade" >
+				<fk_column name="usuario_id" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="gestiion-caracal-prod" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.44-bin.jar" driver_desc="Standard" url="jdbc:mysql://localhost:3306/gestion-caracal?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull" host="localhost" port="3306" instance="gestion-caracal" user="root" usage="Production" sshEnable="true" sshHost="82.223.16.102" sshPort="22" sshUser="root" sshUseKey="false" sshPassword="Fw33Qo0Z58" sshPublicKey="" sshPassphrase="" />
+	<connector name="localhost" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.43-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="gestion-caracal" user="root" />
+	<layout name="Correo" id="Layout_f516ff" show_relation="columns" >
+		<entity schema="gestion-caracal" name="personas" color="c1d8ee" x="45" y="45" />
+		<entity schema="gestion-caracal" name="correos" color="c1d8ee" x="555" y="105" />
+		<entity schema="gestion-caracal" name="estado_correo" color="c1d8ee" x="735" y="105" />
+		<entity schema="gestion-caracal" name="adjuntos" color="c1d8ee" x="615" y="330" />
+		<entity schema="gestion-caracal" name="destinatarios" color="c1d8ee" x="375" y="300" />
+		<entity schema="gestion-caracal" name="socios" color="c1d8ee" x="225" y="45" />
+		<script name="Sql_Editor" id="Editor_52c9200" language="SQL" >
+			<string><![CDATA[select email from personas where email is not null and email != ""]]></string>
+		</script>
+	</layout>
+	<layout name="Default Layout" id="Layout_16821e4" show_relation="columns" >
+		<entity schema="gestion-caracal" name="activos" color="f5ddbf" x="1185" y="825" />
+		<entity schema="gestion-caracal" name="apuntes" color="c8f5bf" x="1230" y="360" />
+		<entity schema="gestion-caracal" name="arqueros" color="d2bff5" x="1935" y="645" />
+		<entity schema="gestion-caracal" name="asiento_factura" color="f5ddbf" x="1380" y="825" />
+		<entity schema="gestion-caracal" name="asientos" color="bfd4f5" x="2175" y="45" />
+		<entity schema="gestion-caracal" name="balance" color="bfd4f5" x="1785" y="300" />
+		<entity schema="gestion-caracal" name="categorias" color="f5ddbf" x="195" y="285" />
+		<entity schema="gestion-caracal" name="clasificaciones" color="f5ddbf" x="195" y="45" />
+		<entity schema="gestion-caracal" name="clasificaciones_rondas" color="f5ddbf" x="360" y="285" />
+		<entity schema="gestion-caracal" name="club" color="d2bff5" x="2085" y="645" />
+		<entity schema="gestion-caracal" name="competiciones" color="bfbff5" x="45" y="525" />
+		<entity schema="gestion-caracal" name="competiciones_imagenes" color="bfbff5" x="240" y="525" />
+		<entity schema="gestion-caracal" name="cuenta_resultados" color="f5ddbf" x="1185" y="1020" />
+		<entity schema="gestion-caracal" name="divisiones" color="f5ddbf" x="1035" y="1020" />
+		<entity schema="gestion-caracal" name="ejercicio_actual" color="bfd4f5" x="2175" y="300" />
+		<entity schema="gestion-caracal" name="ejercicios" color="bfd4f5" x="1950" y="45" />
+		<entity schema="gestion-caracal" name="estados_ejercicio" color="bfd4f5" x="1950" y="300" />
+		<entity schema="gestion-caracal" name="estados_usuario" color="bfd4f5" x="2760" y="900" />
+		<entity schema="gestion-caracal" name="estr_balance" color="c8f5bf" x="1410" y="180" />
+		<entity schema="gestion-caracal" name="estr_cuenta_resultados" color="c8f5bf" x="1035" y="165" />
+		<entity schema="gestion-caracal" name="eventos" color="f5ddbf" x="1035" y="870" />
+		<entity schema="gestion-caracal" name="federaciones" color="d2bff5" x="2250" y="645" />
+		<entity schema="gestion-caracal" name="imagenes" color="f5ddbf" x="1035" y="675" />
+		<entity schema="gestion-caracal" name="localidades" color="d2bff5" x="1785" y="945" />
+		<entity schema="gestion-caracal" name="miembros_patrulla" color="f5ddbf" x="705" y="285" />
+		<entity schema="gestion-caracal" name="modalidades" color="f5ddbf" x="45" y="285" />
+		<entity schema="gestion-caracal" name="modo_estructura" color="f5ddbf" x="1185" y="645" />
+		<entity schema="gestion-caracal" name="modos" color="bfbff5" x="45" y="720" />
+		<entity schema="gestion-caracal" name="niveles_balance" color="c8f5bf" x="1590" y="180" />
+		<entity schema="gestion-caracal" name="origen_ingresos" color="f5ddbf" x="1380" y="675" />
+		<entity schema="gestion-caracal" name="participantes" color="f5ddbf" x="360" y="45" />
+		<entity schema="gestion-caracal" name="participantes_rondas" color="f5ddbf" x="525" y="45" />
+		<entity schema="gestion-caracal" name="patrullas" color="f5ddbf" x="870" y="45" />
+		<entity schema="gestion-caracal" name="personas" color="d2bff5" x="1785" y="645" />
+		<entity schema="gestion-caracal" name="proveedores" color="d2bff5" x="2085" y="945" />
+		<entity schema="gestion-caracal" name="provincias" color="d2bff5" x="1935" y="945" />
+		<entity schema="gestion-caracal" name="proyectos" color="bfd4f5" x="1800" y="150" />
+		<entity schema="gestion-caracal" name="rondas" color="f5ddbf" x="705" y="45" />
+		<entity schema="gestion-caracal" name="saldos" color="f5ddbf" x="1560" y="825" />
+		<entity schema="gestion-caracal" name="socios" color="bfd4f5" x="2430" y="645" />
+		<entity schema="gestion-caracal" name="socios_foto" color="bfd4f5" x="2610" y="645" />
+		<entity schema="gestion-caracal" name="tipos_asiento" color="f5ddbf" x="1560" y="1125" />
+		<entity schema="gestion-caracal" name="tipos_competicion" color="bfbff5" x="240" y="720" />
+		<entity schema="gestion-caracal" name="usuarios" color="c8f5bf" x="2610" y="1170" />
+		<entity schema="gestion-caracal" name="usuarios_conexiones" color="c8f5bf" x="2430" y="1170" />
+		<entity schema="gestion-caracal" name="grupo_cuentas" color="c8f5bf" x="1230" y="45" />
+		<entity schema="gestion-caracal" name="cuentas_mayor" color="c8f5bf" x="1230" y="180" />
+		<entity schema="gestion-caracal" name="tipos_cuenta" color="c8f5bf" x="1080" y="360" />
+		<entity schema="gestion-caracal" name="estados" color="bfd4f5" x="2610" y="900" />
+		<browser id="Browse_61b3de" name="estados" confirm_updates="y" >
+			<browse_table schema="gestion-caracal" entity="estados" x="20" y="20" width="429" height="330" />
+		</browser>
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_543ffd5" show_column_type="y" show_relation="columns" >
+		<entity schema="gestion-caracal" name="activos" color="f5ddbf" x="1410" y="855" />
+		<entity schema="gestion-caracal" name="apuntes" color="c8f5bf" x="1455" y="390" />
+		<entity schema="gestion-caracal" name="arqueros" color="d2bff5" x="2355" y="675" />
+		<entity schema="gestion-caracal" name="asiento_factura" color="f5ddbf" x="1635" y="855" />
+		<entity schema="gestion-caracal" name="asientos" color="bfd4f5" x="2610" y="75" />
+		<entity schema="gestion-caracal" name="balance" color="bfd4f5" x="2130" y="330" />
+		<entity schema="gestion-caracal" name="categorias" color="f5ddbf" x="225" y="315" />
+		<entity schema="gestion-caracal" name="clasificaciones" color="f5ddbf" x="270" y="75" />
+		<entity schema="gestion-caracal" name="clasificaciones_rondas" color="f5ddbf" x="450" y="315" />
+		<entity schema="gestion-caracal" name="club" color="d2bff5" x="2550" y="675" />
+		<entity schema="gestion-caracal" name="competiciones" color="bfbff5" x="45" y="555" />
+		<entity schema="gestion-caracal" name="competiciones_imagenes" color="bfbff5" x="270" y="555" />
+		<entity schema="gestion-caracal" name="cuenta_resultados" color="f5ddbf" x="1395" y="1050" />
+		<entity schema="gestion-caracal" name="cuentas_mayor" color="c8f5bf" x="1455" y="210" />
+		<entity schema="gestion-caracal" name="divisiones" color="f5ddbf" x="1185" y="915" />
+		<entity schema="gestion-caracal" name="ejercicio_actual" color="bfd4f5" x="2610" y="330" />
+		<entity schema="gestion-caracal" name="ejercicios" color="bfd4f5" x="2370" y="75" />
+		<entity schema="gestion-caracal" name="estados" color="bfd4f5" x="3270" y="930" />
+		<entity schema="gestion-caracal" name="estados_ejercicio" color="bfd4f5" x="2370" y="330" />
+		<entity schema="gestion-caracal" name="estados_usuario" color="bfd4f5" x="3495" y="930" />
+		<entity schema="gestion-caracal" name="estr_balance" color="c8f5bf" x="1680" y="210" />
+		<entity schema="gestion-caracal" name="estr_cuenta_resultados" color="c8f5bf" x="1260" y="195" />
+		<entity schema="gestion-caracal" name="eventos" color="f5ddbf" x="1185" y="705" />
+		<entity schema="gestion-caracal" name="federaciones" color="d2bff5" x="2775" y="675" />
+		<entity schema="gestion-caracal" name="grupo_cuentas" color="c8f5bf" x="1455" y="75" />
+		<entity schema="gestion-caracal" name="imagenes" color="f5ddbf" x="1410" y="705" />
+		<entity schema="gestion-caracal" name="localidades" color="d2bff5" x="2130" y="975" />
+		<entity schema="gestion-caracal" name="miembros_patrulla" color="f5ddbf" x="825" y="315" />
+		<entity schema="gestion-caracal" name="modalidades" color="f5ddbf" x="45" y="165" />
+		<entity schema="gestion-caracal" name="modo_estructura" color="f5ddbf" x="1635" y="675" />
+		<entity schema="gestion-caracal" name="modos" color="bfbff5" x="45" y="750" />
+		<entity schema="gestion-caracal" name="niveles_balance" color="c8f5bf" x="1875" y="210" />
+		<entity schema="gestion-caracal" name="origen_ingresos" color="f5ddbf" x="1860" y="855" />
+		<entity schema="gestion-caracal" name="participantes" color="f5ddbf" x="450" y="75" />
+		<entity schema="gestion-caracal" name="participantes_rondas" color="f5ddbf" x="630" y="75" />
+		<entity schema="gestion-caracal" name="patrullas" color="f5ddbf" x="1050" y="75" />
+		<entity schema="gestion-caracal" name="personas" color="d2bff5" x="2145" y="675" />
+		<entity schema="gestion-caracal" name="proveedores" color="d2bff5" x="2580" y="975" />
+		<entity schema="gestion-caracal" name="provincias" color="d2bff5" x="2355" y="975" />
+		<entity schema="gestion-caracal" name="proyectos" color="bfd4f5" x="2145" y="180" />
+		<entity schema="gestion-caracal" name="rondas" color="f5ddbf" x="825" y="75" />
+		<entity schema="gestion-caracal" name="saldos" color="f5ddbf" x="1860" y="1155" />
+		<entity schema="gestion-caracal" name="socios" color="bfd4f5" x="3030" y="675" />
+		<entity schema="gestion-caracal" name="socios_foto" color="bfd4f5" x="3270" y="675" />
+		<entity schema="gestion-caracal" name="tipos_asiento" color="f5ddbf" x="1860" y="1005" />
+		<entity schema="gestion-caracal" name="tipos_competicion" color="bfbff5" x="270" y="750" />
+		<entity schema="gestion-caracal" name="tipos_cuenta" color="c8f5bf" x="1230" y="390" />
+		<entity schema="gestion-caracal" name="usuarios" color="c8f5bf" x="3255" y="1200" />
+		<entity schema="gestion-caracal" name="usuarios_conexiones" color="c8f5bf" x="3030" y="1200" />
+		<callout x="1455" y="135" pointer="NO" >
+			<comment><![CDATA[Double-click any table, column or foreign key to edit, right-click to start one of the tools below.
+Use the Relational Data Browse for simultaneously exploring data from multiple tables.
+All tools will be saved to project file and can be reopen.]]></comment>
+		</callout>
+		<group name="clasificaciones" color="f7f3ec" >
+			<entity schema="gestion-caracal" name="clasificaciones" />
+			<entity schema="gestion-caracal" name="participantes" />
+			<entity schema="gestion-caracal" name="participantes_rondas" />
+			<entity schema="gestion-caracal" name="rondas" />
+			<entity schema="gestion-caracal" name="clasificaciones_rondas" />
+			<entity schema="gestion-caracal" name="categorias" />
+			<entity schema="gestion-caracal" name="modalidades" />
+			<entity schema="gestion-caracal" name="miembros_patrulla" />
+			<entity schema="gestion-caracal" name="patrullas" />
+		</group>
+		<group name="cuentas_mayor" color="eef7ec" >
+			<entity schema="gestion-caracal" name="cuentas_mayor" />
+			<entity schema="gestion-caracal" name="estr_balance" />
+			<entity schema="gestion-caracal" name="niveles_balance" />
+			<entity schema="gestion-caracal" name="apuntes" />
+			<entity schema="gestion-caracal" name="tipos_cuenta" />
+			<entity schema="gestion-caracal" name="estr_cuenta_resultados" />
+			<entity schema="gestion-caracal" name="grupo_cuentas" />
+		</group>
+		<group name="ejercicios" color="ecf0f7" >
+			<entity schema="gestion-caracal" name="ejercicios" />
+			<entity schema="gestion-caracal" name="asientos" />
+			<entity schema="gestion-caracal" name="ejercicio_actual" />
+			<entity schema="gestion-caracal" name="estados_ejercicio" />
+			<entity schema="gestion-caracal" name="balance" />
+			<entity schema="gestion-caracal" name="proyectos" />
+		</group>
+		<group name="personas" color="f0ecf7" >
+			<entity schema="gestion-caracal" name="personas" />
+			<entity schema="gestion-caracal" name="arqueros" />
+			<entity schema="gestion-caracal" name="provincias" />
+			<entity schema="gestion-caracal" name="localidades" />
+			<entity schema="gestion-caracal" name="club" />
+			<entity schema="gestion-caracal" name="federaciones" />
+			<entity schema="gestion-caracal" name="proveedores" />
+		</group>
+		<group name="competiciones" color="ececf7" >
+			<entity schema="gestion-caracal" name="competiciones" />
+			<entity schema="gestion-caracal" name="competiciones_imagenes" />
+			<entity schema="gestion-caracal" name="tipos_competicion" />
+			<entity schema="gestion-caracal" name="modos" />
+		</group>
+		<group name="socios" color="ecf0f7" >
+			<entity schema="gestion-caracal" name="socios" />
+			<entity schema="gestion-caracal" name="socios_foto" />
+			<entity schema="gestion-caracal" name="estados" />
+			<entity schema="gestion-caracal" name="estados_usuario" />
+		</group>
+		<group name="usuarios_conexiones" color="eef7ec" >
+			<entity schema="gestion-caracal" name="usuarios_conexiones" />
+			<entity schema="gestion-caracal" name="usuarios" />
+		</group>
+		<group name="activos" color="f7f3ec" >
+			<entity schema="gestion-caracal" name="activos" />
+			<entity schema="gestion-caracal" name="asiento_factura" />
+			<entity schema="gestion-caracal" name="cuenta_resultados" />
+			<entity schema="gestion-caracal" name="divisiones" />
+			<entity schema="gestion-caracal" name="eventos" />
+			<entity schema="gestion-caracal" name="imagenes" />
+			<entity schema="gestion-caracal" name="modo_estructura" />
+			<entity schema="gestion-caracal" name="origen_ingresos" />
+			<entity schema="gestion-caracal" name="saldos" />
+			<entity schema="gestion-caracal" name="tipos_asiento" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_1a09ec1" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	`gestion-caracal`.cuentas_mayor r;]]></string>
+		</script>
+		<browser id="Browse_f6cd9d" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="gestion-caracal" entity="cuentas_mayor" x="20" y="20" width="400" height="300" >
+				<browse_table schema="gestion-caracal" entity="apuntes" fk="apuntes_ibfk_2" x="440" y="20" width="400" height="300" >
+					<browse_table schema="gestion-caracal" entity="asientos" fk="apuntes_ibfk_1" x="860" y="20" width="400" height="300" record_view="y" />
+				</browse_table>
+			</browse_table>
+		</browser>
+		<query id="Query_6a21a2" name="Sample Query Builder" >
+			<query_table schema="gestion-caracal" name="cuentas_mayor" alias="cm" x="45" y="45" >
+				<column name="id" />
+				<column name="codigo" />
+				<column name="descripcion" />
+				<column name="grupo_cuentas_id" />
+				<column name="tipo_cuenta_id" />
+				<query_table schema="gestion-caracal" name="apuntes" alias="a" x="225" y="45" fk="apuntes_ibfk_2" type="Inner Join" >
+					<column name="id" />
+					<column name="numero" />
+					<column name="cuenta_debe_id" />
+					<column name="importe_debe" />
+					<column name="cuenta_haber_id" />
+					<column name="importe_haber" />
+					<column name="descripcion" />
+					<column name="observaciones" />
+					<column name="asiento_id" />
+					<query_table schema="gestion-caracal" name="asientos" alias="a1" x="420" y="45" fk="apuntes_ibfk_1" type="Inner Join" >
+						<column name="id" />
+						<column name="numero" />
+						<column name="fecha" />
+						<column name="descripcion" />
+						<column name="ejercicio_id" />
+						<column name="proyecto_id" />
+						<column name="observaciones" />
+						<column name="importe_debe" />
+						<column name="importe_haber" />
+					</query_table>
+				</query_table>
+			</query_table>
+		</query>
+	</layout>
+</project>

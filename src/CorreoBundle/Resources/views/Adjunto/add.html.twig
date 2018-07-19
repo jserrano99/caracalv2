@@ -1,0 +1,44 @@
+{% extends "GestionBundle::menu.html.twig" %} 
+{% block titulo %} ENVIO MASIVO DE CORREOS: ADJUNTAR FICHERO 
+    <br/>
+    <a href="{{path("queryCorreo")}}" class="btn btn-success">Volver</a>
+    <a href="{{path("addDestinatario",{"correo_id":Correo.id})}}" 
+       class="btn btn-success">Destinatarios</a>
+    <hr/>
+{% endblock %}
+    
+{% block contenido %}
+     
+     <div class="container">
+        <h4>Correo:{{Correo.asunto}}<h4/>
+        <hr/>
+        <h4>Nuevo Adjunto</h4>
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="container">
+        <h4>Archivos</h4><hr/>
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Descripcion</th>
+                    <th class="text-center text-bold">Fichero</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Adjunto in Adjuntos %}
+                    <tr>
+                        <td class="text-center">{{Adjunto.id}}</td>
+                        <td>{{Adjunto.descripcion}}</td>
+                        <td>{{Adjunto.fichero}}</td>
+                        <td class="text-center">
+                           <a href="{{path("deleteAdjunto",{ "id":Adjunto.id })}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

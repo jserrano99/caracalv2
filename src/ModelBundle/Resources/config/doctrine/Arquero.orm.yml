@@ -1,0 +1,64 @@
+ModelBundle\Entity\Arquero:
+    type: entity
+    table: arqueros
+    indexes:
+        idx_licencia:
+            columns:
+                - licencia
+        idx_categoria:
+            columns:
+                - categoria_id
+        idx_club:
+            columns:
+                - club_id
+        idx_persona:
+            columns:
+                - persona_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        licencia:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+    manyToOne:
+        club:
+            targetEntity: Club
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                club_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        categoria:
+            targetEntity: Categoria
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categoria_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        persona:
+            targetEntity: Persona
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                persona_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

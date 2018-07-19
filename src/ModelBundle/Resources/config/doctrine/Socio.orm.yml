@@ -1,0 +1,73 @@
+ModelBundle\Entity\Socio:
+    type: entity
+    table: socios
+    indexes:
+        idx_estado:
+            columns:
+                - estado_id
+        idx_persona:
+            columns:
+                - persona_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nmsocio:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        licenciaMonitor:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: licencia_monitor
+        numeroLicencia:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+            column: numero_licencia
+        fcalta:
+            type: date
+            nullable: true
+        fcbaja:
+            type: date
+            nullable: true
+        observaciones:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+    manyToOne:
+        persona:
+            targetEntity: Persona
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                persona_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        estado:
+            targetEntity: Estado
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

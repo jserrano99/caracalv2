@@ -1,0 +1,43 @@
+ContabilidadBundle\Entity\AsientoIngreso:
+    type: entity
+    table: null
+    repositoryClass: ContabilidadBundle\Repository\AsientoIngresoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        importe:
+            type: float
+        fecha:
+            type: date
+        descripcion:
+            type: string
+            length: 255
+        observaciones:
+            type: text
+    manyToOne:
+        proyecto:
+            targetEntity: Proyecto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            orphanRemoval: false
+        cuentaIngreso:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            orphanRemoval: false
+        cuentaDestino:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,55 @@
+{% extends "ContabilidadBundle::menu.html.twig" %} 
+{% block titulo %} CONSULTA DE EJERCICIOS {% endblock %}
+{% block contenido %}
+    {%include 'ContabilidadBundle::funciones.html.twig'%}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addEjercicio")}}" class="btn btn-success">Nuevo Ejercicio</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Fecha Inicio</th>
+                    <th class="text-center text-bold">Fecha Fin</th>
+                    <th class="text-center text-bold">Estado</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Ejercicio in Ejercicios %}
+                    <tr>
+                        <td class="text-center">
+                            <a href="{{path("editEjercicio",{ "id":Ejercicio.id })}}">{{Ejercicio.id}}</a>
+                        </td>
+                        <td class="text-center">{{Ejercicio.descripcion}}</td>
+                        <td class="text-center"><span style="display:none;">{{Ejercicio.fcini|date ('Ymd')}}</span>
+                            {{Ejercicio.fcini|date ('d/m/Y')}}</td>
+                        <td class="text-center"><span style="display:none;">{{Ejercicio.fcfin|date ('Ymd')}}</span>
+                            {{Ejercicio.fcfin|date ('d/m/Y')}}</td>
+                        <td>{{Ejercicio.estadoEjercicio.descripcion}}</td>
+                        <td class="text-center">
+                           <a href="{{path("queryAsiento",{ "ejercicio_id":Ejercicio.id })}}" 
+                              class="btn btn-success">Asientos</a>
+                           {% if ( Ejercicio.estadoEjercicio.id == 1) %}
+                              <input type="button" id="boton-cierre" 
+                                  class="btn btn-danger" value="Cerrar" onClick="CerrarEjercicio({{Ejercicio.id}})">
+                              <input type="button" id="boton-renumerar" 
+                                  class="btn btn-warning" value="Renumerar" onClick="RenumeraAsientos({{Ejercicio.id}})">
+                           {% endif %}
+                           <a href="{{path("estableceEjercicio",{ "ejercicio_id":Ejercicio.id })}}" 
+                              class="btn btn-info">Actual</a>
+                           
+                        </td>
+                    </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

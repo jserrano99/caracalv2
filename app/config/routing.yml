@@ -1,0 +1,43 @@
+correo:
+    resource: "@CorreoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    type: xml
+    
+contabilidad:
+    resource: "@ContabilidadBundle/Resources/config/routing.yml"
+    prefix:   /
+
+usuario:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"  
+    prefix:   /
+
+competicion:
+    resource: "@CompeticionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cata:
+    resource: "@CataBundle/Resources/config/routing.yml"
+    prefix:   /
+
+persona:
+    resource: "@PersonaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+socio:
+    resource: "@SocioBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gestion:
+    resource: "@GestionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+model:
+    resource: "@ModelBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

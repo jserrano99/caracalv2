@@ -1,0 +1,75 @@
+CompeticionBundle\Entity\PartiRonda:
+    type: entity
+    table: participantes_rondas
+    repositoryClass: CompeticionBundle\Repository\PartiRondaRepository
+    indexes:
+        idx_ronda:
+            columns:
+                - ronda_id
+        idx_participante:
+            columns:
+                - participante_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        inscrito:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: false
+        pagado:
+            type: string
+            nullable: true
+            length: 1
+            options:
+                fixed: false
+        puntos:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        onces:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        dieces:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        presentado:
+            type: smallint
+            nullable: true
+            options:
+                unsigned: false
+    manyToOne:
+        ronda:
+            targetEntity: Ronda
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        participante:
+            targetEntity: Participante
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                participante_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

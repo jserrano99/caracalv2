@@ -1,0 +1,83 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} MIEMBROS PATRULLA: {{Patrulla.ronda.competicion.descripcion}} 
+	<br/>
+	Ronda: {{Patrulla.ronda.descripcion}} PATRULLA Nº: {{Patrulla.numero}}
+	<hr/>
+    <a href="{{path("queryPatrulla",{ "ronda_id":Patrulla.ronda.id })}}" class="btn btn-success">Volver</a>
+                       
+{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <table class= "table" border="1">
+			 <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Dorsal</th>
+                    <th class="text-center text-bold">Nombre</th>
+					<th class="text-center text-bold">Club</th>
+				    <th class="text-center text-bold">Categoria</th>
+					<th class="text-center text-bold">Modalidad</th>				
+					<th class="text-center text-bold">Acciones</th>				
+                </tr>
+            </thead>
+            <tbody>
+                {% for MiembroPatrulla in MiembrosPatrulla %}
+                    <tr>
+                        <td class="text-center">{{MiembroPatrulla.id}}</td>
+						<td class="text-center" >{{MiembroPatrulla.dorsal}}</td>
+						<td class="text-center" >{{MiembroPatrulla.apenom}}</td>
+						<td class="text-center" >{{MiembroPatrulla.club}}</td>
+						<td class="text-center" >{{MiembroPatrulla.categoria}}</td>
+						<td class="text-center" >{{MiembroPatrulla.modalidad}}</td>
+                        <td class="text-center">
+							<a href="{{path("deleteMiembroPatrulla",{ "id":MiembroPatrulla.id,
+																	  "patrulla_id":Patrulla.id,
+																	  "ronda_id":Patrulla.ronda.id})}}" 
+							 class="btn btn-danger">Eliminar</a>
+						</td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+        </table>
+    </div>
+			<hr/>
+	<div class="container-fluid">
+        
+        <table class= "tabla table" border="1">
+			 <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Dorsal</th>
+                    <th class="text-center text-bold">Nombre</th>
+					<th class="text-center text-bold">Club</th>
+				    <th class="text-center text-bold">Categoria</th>
+					<th class="text-center text-bold">Modalidad</th>	
+ 					<th class="text-center text-bold">Acciones</th>				
+               </tr>
+            </thead>
+            <tbody>
+                 {% for MiembroSINPatrulla in MiembrosSINPatrulla %}
+                    <tr>
+                        <td class="text-center">{{MiembroSINPatrulla.partiRonda_id}}</td>
+						<td class="text-center" >{{MiembroSINPatrulla.dorsal}}</td>
+						<td class="text-center" >{{MiembroSINPatrulla.apenom}}</td>
+						<td class="text-center" >{{MiembroSINPatrulla.club}}</td>
+						<td class="text-center" >{{MiembroSINPatrulla.categoria}}</td>
+						<td class="text-center" >{{MiembroSINPatrulla.modalidad}}</td>
+                        <td class="text-center">
+                           <a href="{{path("addMiembroPatrulla",{ "patrulla_id":Patrulla.id,
+																  "partiRonda_id":MiembroSINPatrulla.partiRonda_id,
+																  "ronda_id":Patrulla.ronda.id})}}" 
+									class="btn btn-success">Añadir</a>
+						</td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+        </table>
+    </div>
+{% endblock %}

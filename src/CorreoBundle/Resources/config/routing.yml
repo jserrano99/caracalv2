@@ -1,0 +1,33 @@
+correo_homepage:
+    path:     /Correo
+    defaults: { _controller: CorreoBundle:Correo:index }
+addCorreo:
+    path:     /Correo/Add
+    defaults: { _controller: CorreoBundle:Correo:Add }
+editCorreo:
+    path:     /Correo/Edit/{id}
+    defaults: { _controller: CorreoBundle:Correo:Edit }
+queryCorreo:
+    path:     /Correo/Query
+    defaults: { _controller: CorreoBundle:Correo:Query }
+deleteCorreo:
+    path:     /Correo/Delete/{id}
+    defaults: { _controller: CorreoBundle:Correo:Delete }
+    
+addAdjunto:
+    path:     /Correo/Adjunto/Add/{correo_id}
+    defaults: { _controller: CorreoBundle:Adjunto:Add }
+deleteAdjunto:
+    path:     /Correo/Adjunto/Delete/{id}
+    defaults: { _controller: CorreoBundle:Adjunto:Delete }
+    
+addDestinatario:
+    path:     /Correo/Destinatario/Add/{correo_id}
+    defaults: { _controller: CorreoBundle:Destinatario:Add }
+deleteDestinatario:
+    path:     /Correo/Destinatario/Delete/{id}
+    defaults: { _controller: CorreoBundle:Destinatario:Delete }
+
+addEnviar:
+    path:     /Correo/Enviar/{id}
+    defaults: { _controller: CorreoBundle:Enviar:Add }

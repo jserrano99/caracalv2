@@ -1,0 +1,29 @@
+CorreoBundle\Entity\Correo:
+    type: entity
+    table: correos
+    repositoryClass: CorreoBundle\Repository\CorreoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        asunto:
+            type: string
+            length: 255
+        cuerpo:
+            type: string
+            length: 255
+    manyToOne:
+        estadoCorreo:
+            targetEntity: \CorreoBundle\Entity\EstadoCorreo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_correo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

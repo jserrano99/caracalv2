@@ -1,0 +1,41 @@
+CataBundle\Entity\Localidad:
+    type: entity
+    table: localidades
+    repositoryClass: CataBundle\Repository\LocalidadRepository
+    indexes:
+        idx_provincia:
+            columns:
+                - provincia_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cd:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        provincia:
+            targetEntity: Provincia
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                provincia_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

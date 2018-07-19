@@ -1,0 +1,29 @@
+queryProvincia: 
+    path:     /Cata/Provincia/query
+    defaults: { _controller: CataBundle:Provincia:Query}
+addProvincia: 
+   path:     /Cata/Provincia/add
+   defaults: { _controller: CataBundle:Provincia:Add}
+editProvincia: 
+    path:     /Cata/Provincia/edit/{id}
+    defaults: { _controller: CataBundle:Provincia:Edit}
+deleteProvincia: 
+    path:     /Cata/Provincia/delete/{id}
+    defaults: { _controller: CataBundle:Provincia:Delete}
+
+queryLocalidad: 
+    path:     /Cata/Localidad/query
+    defaults: { _controller: CataBundle:Localidad:Query}
+addLocalidad: 
+   path:     /Cata/Localidad/add
+   defaults: { _controller: CataBundle:Localidad:Add}
+editLocalidad: 
+    path:     /Cata/Localidad/update/{id}
+    defaults: { _controller: CataBundle:Localidad:Edit}
+deleteLocalidad: 
+    path:     /Cata/Localidad/delete/{id}
+    defaults: { _controller: CataBundle:Localidad:Delete}
+
+cata_homepage:
+    path:     /Cata
+    defaults: { _controller: CataBundle:Cata:index }

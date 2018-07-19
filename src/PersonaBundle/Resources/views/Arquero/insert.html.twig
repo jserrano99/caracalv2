@@ -1,0 +1,18 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE ARQUEROS: NUEVO ARQUERO
+<a href="{{path("queryArquero")}}" class="btn btn-success">Volver</a>
+<a href="{{path("addPersona")}}" class="btn btn-success">Crear Persona</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

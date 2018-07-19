@@ -1,0 +1,129 @@
+miembrosPatrulla:
+    path:   /Patrulla/miembro/query/{patrulla_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:MiembroPatrulla:Query}
+
+addMiembroPatrulla:
+    path:   /Patrulla/miembro/add/{patrulla_id}/{partiRonda_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:MiembroPatrulla:Add}
+
+deleteMiembroPatrulla:
+    path:   /Patrulla/miembro/delete/{id}/{patrulla_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:MiembroPatrulla:Delete}
+    
+queryPatrulla:
+    path:   /Patrulla/query/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Query}
+addPatrulla:
+    path:   /Patrulla/add/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Add}
+editPatrulla:
+    path:   /Patrulla/edit/{patrulla_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Edit}
+deletePatrulla:
+    path:   /Patrulla/delete/{patrulla_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Delete}
+generarPatrullas:
+    path:   /Patrulla/genera/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Generar}
+eliminarPatrullas:
+    path:   /Patrulla/eliminar/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Eliminar} 
+
+listadoPatrullas:
+    path:   /Patrulla/listado/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Listado} 
+sobrePatrullas:
+    path:   /Patrulla/sobre/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:Sobre} 
+patrullasDorsal:
+    path:   /Patrulla/PatrullasDorsal/{ronda_id}
+    defaults: { _controller: CompeticionBundle:Patrulla:PatrullasDorsal} 
+
+    
+queryPartiRonda:
+    path:   /PartiRonda/query/{ronda_id}
+    defaults: { _controller: CompeticionBundle:PartiRonda:Query}
+editPartiRonda:
+    path:   /PartiRonda/edit/{partiRonda_id}/{ronda_id}
+    defaults: { _controller: CompeticionBundle:PartiRonda:Edit}
+
+filtroArqueros:
+    path:   /Participante/filtro/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Participante:Filtro}
+
+queryParticipante:
+    path:   /Participante/query/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Participante:Query}
+addParticipante:
+    path:   /Participante/add/{competicion_id}/{arquero_id}
+    defaults: { _controller: CompeticionBundle:Participante:Add}
+editParticipante:
+    path:   /Participante/edit/{id}/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Participante:Edit}
+deleteParticipante:
+    path:   /Participante/delete/{id}/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Participante:Delete}
+
+inscritosRonda:
+    path:   /Ronda/inscritos/{ronda_id}
+    defaults: { _controller: CompeticionBundle:PartiRonda:Inscritos}
+tablillaPuntuacion:
+    path:   /Ronda/tablilla/{ronda_id}
+    defaults: { _controller: CompeticionBundle:PartiRonda:Tablillas}
+
+    
+addRonda:
+    path:   /Ronda/add
+    defaults: { _controller: CompeticionBundle:Ronda:Add}
+queryRonda:
+    path:   /Ronda/query/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Ronda:Query}
+editRonda:
+    path:   /Ronda/edit/{id}
+    defaults: { _controller: CompeticionBundle:Ronda:Edit}
+deleteRonda:
+    path:   /Ronda/delete/{id}
+    defaults: { _controller: CompeticionBundle:Ronda:Delete}
+exportarParticipantes:
+    path:   /Ronda/Exportar/{id}
+    defaults: { _controller: CompeticionBundle:Ronda:Exportar}
+cargaPuntuacion:
+    path:   /Ronda/Carga/{id}
+    defaults: { _controller: CompeticionBundle:Ronda:CargaPuntuacion}
+
+addCompeticion:
+    path:   /Competicion/add
+    defaults: { _controller: CompeticionBundle:Competicion:Add}
+queryCompeticion:
+    path:   /Competicion/query
+    defaults: { _controller: CompeticionBundle:Competicion:Query}
+editCompeticion:
+    path:   /Competicion/edit/{id}
+    defaults: { _controller: CompeticionBundle:Competicion:Edit}
+deleteCompeticion:
+    path:   /Competicion/delete/{id}
+    defaults: { _controller: CompeticionBundle:Competicion:Delete}
+    
+generaClasificatorio:
+    path:   /Clasificacion/Clasificatorio/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Clasificacion:Clasificatorio}
+generaSemifinal:
+    path:   /Clasificacion/Semifinal/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Clasificacion:Semifinal}
+generaFinal:
+    path:   /Clasificacion/Final/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Clasificacion:Final}
+    
+generaRecorridoSimple:
+    path:   /Clasificacion/RecorridoSimple/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Clasificacion:RecorridoSimple}
+    
+exportaClasificacion:
+    path:   /Clasificacion/exporta/{competicion_id}
+    defaults: { _controller: CompeticionBundle:Clasificacion:Exporta}
+
+    
+    
+competicion_homepage:
+    path:     /Competicion
+    defaults: { _controller: CompeticionBundle:Competicion:index }

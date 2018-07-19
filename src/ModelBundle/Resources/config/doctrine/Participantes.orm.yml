@@ -1,0 +1,60 @@
+ModelBundle\Entity\Participantes:
+    type: entity
+    table: participantes
+    indexes:
+        idx_competicion:
+            columns:
+                - competicion_id
+        idx_arquero:
+            columns:
+                - arquero_id
+        idx_modalidad:
+            columns:
+                - modalidad_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        dorsal:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        arquero:
+            targetEntity: Arqueros
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                arquero_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        competicion:
+            targetEntity: Competiciones
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                competicion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        modalidad:
+            targetEntity: Modalidades
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                modalidad_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,51 @@
+{% extends "GestionBundle::layout.html.twig" %} 
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" 
+               class="dropdown-toggle" 
+               data-toggle="dropdown" 
+               role="button" 
+               aria-haspopup="true" 
+               aria-expanded="false">Catálogos<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{path("queryProyecto")}}">Proyectos</a></li>
+                <li><a href="{{path("queryProveedor")}}">Proveedores</a></li>
+                <li><a href="{{path("queryCuentaMayor")}}">Cuentas de Mayor</a></li>
+            </ul>
+        </li>
+        <li><a href="{{path("queryEjercicio")}}">Ejercicios</a></li>
+       	<li class="dropdown">
+            <a href="#" 
+               class="dropdown-toggle" 
+               data-toggle="dropdown" 
+               role="button" 
+               aria-haspopup="true" 
+               aria-expanded="false">Informes Gestión<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{path("libroDiario")}}" target="_blank" >Libro Diario</a></li>
+                <li><a href="{{path("libroMayor")}}" target="_blank" >Libro Mayor</a></li>
+                <li><a href="{{path("repBalance")}}" target="_blank" >Balance</a></li>
+                <li><a href="{{path("repCuentaResultados")}}" target="_blank">Cuenta Resultados</a></li>
+				<li><a href="{{path("saldosCuentaMayor")}}" target="_blank">Saldos Cuenta Mayor</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" 
+               class="dropdown-toggle" 
+               data-toggle="dropdown" 
+               role="button" 
+               aria-haspopup="true" 
+               aria-expanded="false">Asientos<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{path("queryAsiento")}}">Consulta Asientos</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{path("addAsientoFactura")}}">Compra con Factura</a></li>
+                <li><a href="{{path("addAsientoTraspaso")}}">Traspaso de Eefectivo a Caja</a></li>
+                <li><a href="{{path("addAsientoGasto")}}">Asiento de Gastos</a></li>
+                <li><a href="{{path("addAsientoIngreso")}}">Asiento de Ingresos</a></li>
+                <li><a href="{{path("addAsientoIVA")}}">Asiento Saldo IVA</a></li>
+            </ul>
+        </li>
+    </ul>    
+{%endblock%}                                    

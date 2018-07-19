@@ -1,0 +1,100 @@
+PersonaBundle\Entity\Persona:
+    type: entity
+    table: personas
+    repositoryClass: PersonaBundle\Repository\PersonaRepository
+    indexes:
+        idx_localidad:
+            columns:
+                - localidad_id
+        idx_provincia:
+            columns:
+                - provincia_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true 
+            generator:
+                strategy: IDENTITY
+    fields:
+        nif:
+            type: string
+            nullable: false
+            length: 9
+            options:
+                fixed: false
+        nombre:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+        apellido1:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+        apellido2:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+        fcnac:
+            type: date
+            nullable: false
+        email:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+        domicilio:
+            type: string 
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        cdpostal:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: false
+        movil:
+            type: string
+            nullable: true
+            length: 9
+            options:
+                fixed: false
+        telefono:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+    manyToOne:
+        provincia:
+            targetEntity: \CataBundle\Entity\Provincia
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                provincia_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        localidad:
+            targetEntity: \CataBundle\Entity\Localidad
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                localidad_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

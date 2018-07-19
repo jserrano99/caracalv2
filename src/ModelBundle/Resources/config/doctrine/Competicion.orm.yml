@@ -1,0 +1,56 @@
+ModelBundle\Entity\Competicion:
+    type: entity
+    table: competiciones
+    indexes:
+        idx_tipo_competicion:
+            columns:
+                - tipo_competicion_id
+        idx_modo:
+            columns:
+                - modo_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fecha:
+            type: date
+            nullable: false
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        descontar:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    manyToOne:
+        modo:
+            targetEntity: Modo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                modo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipoCompeticion:
+            targetEntity: TipoCompeticion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipo_competicion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

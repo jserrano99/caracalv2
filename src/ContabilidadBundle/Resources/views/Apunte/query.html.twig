@@ -1,0 +1,50 @@
+{% extends "ContabilidadBundle::menu.html.twig" %} 
+{% block titulo %} CONSULTA DE APUNTES : Ejercicio {{Asiento.ejercicio.descripcion}} 
+    <br/>
+    Asiento: {{Asiento.numero}} Fecha: {{Asiento.fecha|date('d/m/Y')}}--{{Asiento.descripcion }}
+    <br/>
+    <a href="{{path("queryAsiento",{"asiento_id":Asiento.id})}}" class="btn btn-success">Volver</a>
+    <a href="{{path("addApunte",{"asiento_id":Asiento.id})}}" class="btn btn-success">Añadir</a>
+    <hr/>
+{% endblock %}
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">Número</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Cuenta Debe</th>
+                    <th class="text-center text-bold">Importe Debe</th>
+                    <th class="text-center text-bold">Importe Haber</th>
+                    <th class="text-center text-bold">Cuenta Haber</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Apunte in Apuntes %}
+                    <tr>
+                        <td class="text-center">
+                            <a href="{{path("editApunte",{"id":Apunte.id})}}">
+                               {{Apunte.numero}}</a></td>
+                        <td>{{Apunte.descripcion}}</td>
+                        <td>{{Apunte.cuentaDebe}}</td>
+                        <td class="text-right">{{Apunte.importeDebe|number_format(2,',','.')}} €</td>
+                        <td class="text-right">{{Apunte.importeHaber|number_format(2,',','.')}} €</td>
+                        <td>{{Apunte.cuentaHaber}}</td>
+
+                        <td class="text-center">
+                            <a href="{{path("deleteApunte",{"id":Apunte.id})}}" 
+                               class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

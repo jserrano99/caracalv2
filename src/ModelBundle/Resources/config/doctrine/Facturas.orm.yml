@@ -1,0 +1,86 @@
+ModelBundle\Entity\Facturas:
+    type: entity
+    table: facturas
+    indexes:
+        idx_proveedor:
+            columns:
+                - proveedor_id
+        idx_asiento:
+            columns:
+                - asiento_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: string
+            nullable: true
+            length: 40
+            options:
+                fixed: false
+        serie:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+        fecha:
+            type: date
+            nullable: true
+        importe:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        baseIva:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: base_iva
+        cuotaIva:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: cuota_iva
+        fichero:
+            type: blob
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        proveedor:
+            targetEntity: Proveedores
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                proveedor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        asiento:
+            targetEntity: Asientos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asiento_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

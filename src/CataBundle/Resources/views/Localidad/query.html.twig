@@ -1,0 +1,39 @@
+{% extends "CataBundle::menu.html.twig" %} 
+{% block titulo %} CATÁLOGO DE LOCALIDADES{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addLocalidad")}}" class="btn btn-success">Nueva Localidad</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Código</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Provincia</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Localidad in Localidades %}
+                    <tr>
+                        <td class="text-center">{{Localidad.id}}</td>
+                        <td class="text-center">{{Localidad.cd}}</td>
+                        <td>{{Localidad.descripcion}}</td>
+                        <td>{{Localidad.provincia.descripcion}}</td>
+                        <td class="text-center">
+                           <a href="{{path("editLocalidad",{ "id":Localidad.id })}}" class="btn btn-success">Editar</a>
+                           <a href="{{path("deleteLocalidad",{ "id":Localidad.id })}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

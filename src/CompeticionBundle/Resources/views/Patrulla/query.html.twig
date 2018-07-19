@@ -1,0 +1,45 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PATRULLAS: {{Ronda.competicion.descripcion}} 
+	<br/>
+	Ronda: {{Ronda.descripcion}}
+	<hr/>
+   <a href="{{path("queryRonda",{"competicion_id":Ronda.competicion.id})}}" class="btn btn-success">Volver</a>
+   <a href="{{path("addPatrulla",{"ronda_id":Ronda.id})}}" class="btn btn-warning">Nueva Patrulla</a>
+   <a href="{{path("generarPatrullas",{"ronda_id":Ronda.id})}}" class="btn btn-info">Generar Patrullas</a>
+   <a href="{{path("eliminarPatrullas",{"ronda_id":Ronda.id})}}" class="btn btn-danger">Eliminar Patrullas</a>
+   <a href="{{path("listadoPatrullas",{"ronda_id":Ronda.id})}}" target="_blank" class="btn btn-info">Listado Patrullas</a>
+   <a href="{{path("sobrePatrullas",{"ronda_id":Ronda.id})}}" target="_blank"  class="btn btn-info">Sobres Patrullas</a>
+    <a href="{{path("patrullasDorsal",{"ronda_id":Ronda.id})}}" target="_blank"  class="btn btn-info">Patrullas Dorsal</a>
+   <br/>
+{% endblock %} 
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <table class="tabla table" border="1">
+			 <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Número Patrulla</th>
+ 					<th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Patrulla in Patrullas %}
+                    <tr>
+                        <td class="text-center">{{Patrulla.id}}</td>
+						<td class="text-center" >{{Patrulla.numero}}</td>
+                        <td class="text-center">
+                           <a href="{{path("editPatrulla",{ "patrulla_id":Patrulla.id, "ronda_id":Ronda.id})}}" class="btn btn-success">Editar</a>
+                           <a href="{{path("deletePatrulla",{ "patrulla_id":Patrulla.id, "ronda_id":Ronda.id})}}" class="btn btn-danger">Eliminar</a>
+						   <a href="{{path("miembrosPatrulla",{ "patrulla_id":Patrulla.id, "ronda_id":Ronda.id})}}" class="btn btn-info">Miembros Patrullas</a>
+						</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

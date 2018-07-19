@@ -1,0 +1,35 @@
+CompeticionBundle\Entity\Patrulla:
+    type: entity
+    table: patrullas
+    repositoryClass: CompeticionBundle\Repository\PatrullaRepository
+    indexes:
+        idx_ronda:
+            columns:
+                - ronda_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        ronda:
+            targetEntity: Ronda
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+ContabilidadBundle\Entity\AsientoTraspaso:
+    type: entity
+    table: null
+    repositoryClass: ContabilidadBundle\Repository\AsientoTraspasoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        observaciones:
+            type: string
+            length: 255
+        importe:
+            type: string
+            length: 255
+        fecha:
+            type: string
+            length: 255
+    manyToOne:
+        cuentaDestino:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            orphanRemoval: false
+    
+    lifecycleCallbacks: {  }

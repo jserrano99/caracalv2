@@ -1,0 +1,15 @@
+CorreoBundle\Entity\EstadoCorreo:
+    type: entity
+    table: estado_correo
+    repositoryClass: CorreoBundle\Repository\EstadoCorreoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        estado:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

@@ -1,0 +1,29 @@
+CorreoBundle\Entity\Adjunto:
+    type: entity
+    table: adjuntos
+    repositoryClass: CorreoBundle\Repository\AdjuntoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fichero:
+            type: string
+            length: 255
+        descripcion:
+            type: string
+            length: 255
+    manyToOne:
+        correo:
+            targetEntity: \CorreoBundle\Entity\Correo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                correo_id:
+                    referencedColumnName: id
+            orphanRemoval: false   
+    lifecycleCallbacks: {  }

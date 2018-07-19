@@ -1,0 +1,84 @@
+ModelBundle\Entity\Apunte:
+    type: entity
+    table: apuntes
+    indexes:
+        idx_asiento:
+            columns:
+                - asiento_id
+        idx_cuenta_debe:
+            columns:
+                - cuenta_debe_id
+        idx_cuenta_haber:
+            columns:
+                - cuenta_haber_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        importeDebe:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: importe_debe
+        importeHaber:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            column: importe_haber
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        observaciones:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+    manyToOne:
+        asiento:
+            targetEntity: Asiento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asiento_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cuentaDebe:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuenta_debe_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cuentaHaber:
+            targetEntity: CuentaMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuenta_haber_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

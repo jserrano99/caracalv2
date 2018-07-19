@@ -1,0 +1,47 @@
+CompeticionBundle\Entity\ClasificacionRonda:
+    type: entity
+    table: clasificaciones_rondas
+    repositoryClass: CompeticionBundle\Repository\ClasificacionRondaRepository
+    indexes:
+        idx_clasificacion:
+            columns:
+                - clasificacion_id
+        idx_ronda:
+            columns:
+                - ronda_id
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        puntos:
+            type: integer
+        onces:
+            type: integer
+        dieces:
+            type: integer
+                   
+    manyToOne: 
+        clasificacion:
+            targetEntity: Clasificacion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                clasificacion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        ronda:
+            targetEntity: Ronda
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: { }

@@ -1,0 +1,41 @@
+CompeticionBundle\Entity\ImagenCompeticion:
+    type: entity
+    table: competiciones_imagenes
+    indexes:
+        idx_competicion:
+            columns:
+                - competicion_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        imagen:
+            type: blob
+            nullable: false
+            length: 16777215
+            options:
+                fixed: false
+        tipo:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        competicion:
+            targetEntity: Competicion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                competicion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

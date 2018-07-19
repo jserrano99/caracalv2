@@ -1,0 +1,43 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE COMPETICIONES: CONSULTA{% endblock %}
+{% block contenido %}
+    {% include "CompeticionBundle:Competicion:funciones.html.twig" %}
+
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addCompeticion")}}" class="btn btn-success">Nueva Competicion</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Fecha</th>
+                    <th class="text-center text-bold">Descripción</th>
+                    <th class="text-center text-bold">Acciones</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for Competicion in Competiciones %}
+                    <tr>
+                        <td class="text-center">{{Competicion.id}}</td>
+						<td>{{Competicion.fecha|date('d/m/Y')}}</td>
+                        <td>{{Competicion.descripcion}}</td>
+                        <td class="text-center">
+                   			<a href="{{path("editCompeticion",{ "id":Competicion.id })}}" class="btn btn-success">Editar</a>
+                           <input type="button" 
+                                  class="btn btn-danger" value="Eliminar" 
+                                  onClick="EliminarCompeticion({{Competicion.id}})" >
+                           <a href="{{path("queryRonda",{ "competicion_id":Competicion.id })}}" class="btn btn-info">Rondas</a>
+						   <a href="{{path("queryParticipante",{ "competicion_id":Competicion.id })}}" class="btn btn-warning">Participantes</a>
+						</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

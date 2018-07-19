@@ -1,0 +1,21 @@
+ContabilidadBundle\Entity\Proyecto:
+    type: entity
+    table: proyectos
+    repositoryClass: ContabilidadBundle\Repository\ProyectoRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

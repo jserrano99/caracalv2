@@ -1,0 +1,4 @@
+gestion_homepage:
+    path:     /
+    defaults: { _controller: GestionBundle:Gestion:index }
+

@@ -1,0 +1,49 @@
+CompeticionBundle\Entity\Ronda:
+    type: entity
+    table: rondas
+    repositoryClass: CompeticionBundle\Repository\RondaRepository
+    indexes:
+        idx_competicion:
+            columns:
+                - competicion_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fecha:
+            type: date
+            nullable: false
+        num:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        activa:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        competicion:
+            targetEntity: Competicion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                competicion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

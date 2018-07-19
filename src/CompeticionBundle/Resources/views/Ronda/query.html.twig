@@ -1,0 +1,40 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE RONDAS:  {{Competicion.descripcion}} 
+	<br/>
+   <a href="{{path("queryCompeticion")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Número</th>
+                    <th class="text-center text-bold">Fecha</th>
+					<th class="text-center text-bold">Descripción</th>
+					<th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Ronda in Rondas %}
+                    <tr>
+                        <td class="text-center">{{Ronda.id}}</td>
+						<td class="text-center" >{{Ronda.num}}</td>
+                    	<td class="text-center">{{Ronda.fecha|date('d/m/Y')}}</td>
+                        <td>{{Ronda.descripcion}}</td>
+                        <td class="text-center">
+                           <a href="{{path("queryPartiRonda",{ "ronda_id":Ronda.id })}}" class="btn btn-success">Participantes</a>
+                          <a href="{{path("queryPatrulla",{ "ronda_id":Ronda.id })}}" class="btn btn-info">Patrullas</a>
+                       
+						</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

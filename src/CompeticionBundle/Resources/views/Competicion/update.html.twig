@@ -1,0 +1,30 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE COMPETICIÓN: {{Competicion.descripcion}}
+	<hr/>
+    <a href="{{path("queryCompeticion")}}" class="btn btn-success">Volver</a>
+    {% if Competicion.tipoCompeticion.id == 2 %} 
+        <a href="{{path("generaRecorridoSimple",{"competicion_id":Competicion.id})}}" class="btn btn-warning">Generar Clasificacion</a>
+        <a href="{{path("exportaClasificacion",{"competicion_id":Competicion.id})}}" class="btn btn-info">Exportar Clasificacion</a>
+    {% endif %}
+    {% if Competicion.tipoCompeticion.id == 3 %} 
+        <a href="{{path("generaClasificatorio",{"competicion_id":Competicion.id})}}" class="btn btn-warning">Clasificatorio</a>
+        <a href="{{path("generaSemifinal",{"competicion_id":Competicion.id})}}" class="btn btn-warning">Semifinal</a>
+        <a href="{{path("generaFinal",{"competicion_id":Competicion.id})}}" class="btn btn-warning">Final</a>
+        <a href="{{path("exportaClasificacion",{"competicion_id":Competicion.id})}}" class="btn btn-info">Exportar Clasificacion</a>
+    {% endif %}
+
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+		  {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+      
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

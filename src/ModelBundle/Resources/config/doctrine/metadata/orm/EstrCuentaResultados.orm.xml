@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doctrine-mapping xmlns="http://Doctrine-project.org/schemas/orm/Doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://Doctrine-project.org/schemas/orm/Doctrine-mapping http://Doctrine-project.org/schemas/orm/Doctrine-mapping.xsd">
+  <entity name="EstrCuentaResultados" table="estr_cuenta_resultados">
+    <indexes>
+      <index name="cuenta_mayor_id" columns="cuenta_mayor_id"/>
+    </indexes>
+    <id name="id" type="integer" column="Id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nivel1" type="string" column="Nivel1" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nivel2" type="string" column="Nivel2" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nivel3" type="string" column="nivel3" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="multiplicador" type="integer" column="multiplicador" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="cuentaMayor" target-entity="CuentasMayor" fetch="LAZY">
+      <join-columns>
+        <join-column name="cuenta_mayor_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</Doctrine-mapping>

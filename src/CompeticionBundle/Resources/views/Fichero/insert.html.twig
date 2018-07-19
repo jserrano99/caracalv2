@@ -1,0 +1,16 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} CARGA DE PUNTUACIONES
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

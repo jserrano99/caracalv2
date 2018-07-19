@@ -1,0 +1,41 @@
+ModelBundle\Entity\SociosFoto:
+    type: entity
+    table: socios_foto
+    indexes:
+        idx_socio:
+            columns:
+                - socio_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        foto:
+            type: blob
+            nullable: false
+            length: 16777215
+            options:
+                fixed: false
+        tipo:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+    manyToOne:
+        socio:
+            targetEntity: Socios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                socio_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

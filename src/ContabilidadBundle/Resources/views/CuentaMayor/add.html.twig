@@ -1,0 +1,12 @@
+{% extends "ContabilidadBundle::menu.html.twig" %} 
+{% block titulo %} EJERCICIOS: NUEVO EJERCICIO 
+    <br>
+    <a href="{{path("queryEjercicio")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

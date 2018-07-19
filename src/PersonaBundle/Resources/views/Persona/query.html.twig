@@ -1,0 +1,37 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PERSONAS *** CONSULTA{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addPersona")}}" class="btn btn-success">Nueva Persona</a>
+        <hr/>
+             
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Nombre</th>
+                    <th class="text-center text-bold">Edad</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Persona in Personas %}
+                    <tr>
+                        <td class="text-center">{{Persona.id}}</td>
+                        <td>{{Persona.apenom}}</td>
+                        <td class="text-center">{{Persona.edad}}</td>
+                        <td class="text-center">
+                           <a href="{{path("editPersona",{ "id":Persona.id })}}" class="btn btn-success">Editar</a>
+                           <a href="{{path("deletePersona",{ "id":Persona.id })}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Doctrine-mapping xmlns="http://Doctrine-project.org/schemas/orm/Doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://Doctrine-project.org/schemas/orm/Doctrine-mapping http://Doctrine-project.org/schemas/orm/Doctrine-mapping.xsd">
+  <entity name="ParticipantesRondas" table="participantes_rondas">
+    <indexes>
+      <index name="idx_ronda" columns="ronda_id"/>
+      <index name="idx_participante" columns="participante_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="inscrito" type="string" column="inscrito" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pagado" type="string" column="pagado" length="1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="puntos" type="integer" column="puntos" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="onces" type="integer" column="onces" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dieces" type="integer" column="dieces" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="presentado" type="smallint" column="presentado" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="ronda" target-entity="Rondas" fetch="LAZY">
+      <join-columns>
+        <join-column name="ronda_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="participante" target-entity="Participantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="participante_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</Doctrine-mapping>

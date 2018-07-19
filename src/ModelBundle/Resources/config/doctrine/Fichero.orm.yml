@@ -1,0 +1,24 @@
+ModelBundle\Entity\Fichero:
+    type: entity
+    table: null
+    repositoryClass: ModelBundle\Repository\FicheroRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+        tipo:
+            type: string
+            length: 255
+        path:
+            type: string
+            length: 255
+        file:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

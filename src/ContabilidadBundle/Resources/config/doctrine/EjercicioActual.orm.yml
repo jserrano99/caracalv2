@@ -1,0 +1,23 @@
+ContabilidadBundle\Entity\EjercicioActual:
+    type: entity
+    table: ejercicio_actual
+    repositoryClass: ContabilidadBundle\Repository\EjercicioActualRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        ejercicio:
+            targetEntity: Ejercicio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ejercicio_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+                    
+    lifecycleCallbacks: {  }

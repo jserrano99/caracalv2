@@ -1,0 +1,32 @@
+CorreoBundle\Entity\Destinatario:
+    type: entity
+    table: destinatarios
+    repositoryClass: CorreoBundle\Repository\DestinatarioRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        persona:
+            targetEntity: \PersonaBundle\Entity\Persona
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                persona_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        correo:
+            targetEntity: \CorreoBundle\Entity\Correo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                correo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

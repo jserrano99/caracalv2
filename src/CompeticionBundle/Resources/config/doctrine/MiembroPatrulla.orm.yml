@@ -1,0 +1,41 @@
+CompeticionBundle\Entity\MiembroPatrulla:
+    type: entity
+    table: miembros_patrulla
+    indexes:
+        idx_parti_ronda:
+            columns:
+                - parti_ronda_id
+        idx_patrulla:
+            columns:
+                - patrulla_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        patrulla:
+            targetEntity: Patrulla
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                patrulla_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        partiRonda:
+            targetEntity: PartiRonda
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                parti_ronda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

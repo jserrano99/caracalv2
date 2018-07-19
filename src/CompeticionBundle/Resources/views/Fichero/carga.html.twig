@@ -1,0 +1,23 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} CARGA REALIZADA
+	<br/>
+	{{Ronda.competicion.descripcion}}
+	<br/>
+	{{Ronda.descripcion}}
+	<br/>
+	<a href="{{path("queryPartiRonda",{ "ronda_id":Ronda.id })}}" class="btn btn-info">Volver</a>
+	<br/>
+	<br/>
+	
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+    </div>
+{% endblock %}

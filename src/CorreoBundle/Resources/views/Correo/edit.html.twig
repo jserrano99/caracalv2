@@ -1,0 +1,19 @@
+{% extends "GestionBundle::menu.html.twig" %} 
+{% block titulo %} ENVIO MASIVO DE CORREOS: EDITAR CORREO 
+<a href="{{path("queryCorreo")}}" class="btn btn-success">Volver</a>
+
+{% endblock %}
+    
+{% block contenido %}
+    <h4>Correo : {{Correo.asunto}}<h4/>
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

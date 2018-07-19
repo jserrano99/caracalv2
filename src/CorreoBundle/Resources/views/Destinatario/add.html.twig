@@ -1,0 +1,43 @@
+{% extends "GestionBundle::menu.html.twig" %} 
+{% block titulo %} ENVIO MASIVO DE CORREOS: DESTINATARIOS  
+    <br/>
+    <a href="{{path("queryCorreo")}}" class="btn btn-success">Volver</a>
+    <a href="{{path("addEnviar",{"id":Correo.id})}}" 
+       class="btn btn-success">Enviar Correo</a>
+{% endblock %}
+    
+{% block contenido %}
+     
+     <div class="container">
+        <h4>Correo:{{Correo.asunto}}<h4/>
+        <hr/>
+        <h4>Nuevo Destinatario</h4>
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="container">
+        <h4>Destinatarios</h4><hr/>
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Nombre y Apellidos</th>
+                    <th class="text-center text-bold">Correo Electrónico</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Destinatario in Destinatarios %}
+                    <tr>
+                        <td class="text-center">{{Destinatario.id}}</td>
+                        <td>{{Destinatario.nombre}}</td>
+                        <td>{{Destinatario.eMail}}</td>
+                        <td class="text-center">
+                           <a href="{{path("deleteDestinatario",{ "id":Destinatario.id })}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

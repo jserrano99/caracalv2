@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            {% block title %} GESTIÓN CARACAL{% endblock %}
+        </title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.js"></script>
+        
+        <script type="text/javascript" src="{{asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    </head>
+    <style>
+        .cabecera {
+               display: table-header-group;
+               vertical-align: middle;
+               align-items:  center;
+               font-size: 18px;
+               border-color: inherit;
+               background-color: background;
+               font-style: oblique;
+               font-family: serif;
+        }
+    </style>
+    
+    <script>
+        $( function() {
+            $('.tabla').DataTable({
+                "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+                "autoWidth": true,
+                "jQueryUI": true,
+                "stateSave": true,
+                "order":[[1,"desc"]]
+            });
+             
+        });
+    </script>
+    <body>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{path("homepage")}}"> GESTIÓN CARACAL </a>
+                    </div>
+                    
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            {% block menu %}
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+                                            <a href="#" 
+                                               class="dropdown-toggle" 
+                                               data-toggle="dropdown" 
+                                               role="button" 
+                                               aria-haspopup="true" 
+                                               aria-expanded="false">Administración<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{path("queryUsuario")}}">Gestión Usuarios </a></li>
+                                                <li><a href="{{path("cata_homepage")}}">Catálogos</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">Parámetros</a></li>
+                                            </ul>
+                                            
+                                        </li>
+                                        <li><a href="{{path("correo_homepage")}}">Correos</a></li>
+                                        <li><a href="{{path("persona_homepage")}}">Gestión Personas</a></li>
+										<li><a href="{{path("competicion_homepage")}}">Gestión Competiciones</a></li>
+										<li><a href="{{path("contabilidad_homepage")}}">Contabilidad</a></li>
+                                    </ul>
+                            {% endblock %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" 
+                                   class="dropdown-toggle" 
+                                   data-toggle="dropdown" 
+                                   role="button" 
+                                   aria-haspopup="true" 
+                                   aria-expanded="false"> 
+                                   <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse --> 
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+                        
+        <section id="contenido">
+                <div class="container"> <h3>
+                {% block titulo %} {% endblock %}
+                    </h3></div>
+            {% block contenido %} Contenido por Defecto de la Plantilla  {% endblock %}
+        </section>
+        <footer>
+            <span class="label label-info">FOySI Fotografía y Sistema de Información, 2017 &copy;</span>
+        </footer>
+    </body>
+</html>

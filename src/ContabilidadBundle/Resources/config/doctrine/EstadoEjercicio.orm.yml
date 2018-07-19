@@ -1,0 +1,15 @@
+ContabilidadBundle\Entity\EstadoEjercicio:
+    type: entity
+    table: estados_ejercicio
+    repositoryClass: ContabilidadBundle\Repository\EstadoEjercicioRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        descripcion:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

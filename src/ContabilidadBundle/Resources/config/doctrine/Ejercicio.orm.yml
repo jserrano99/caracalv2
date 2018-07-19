@@ -1,0 +1,81 @@
+ContabilidadBundle\Entity\Ejercicio:
+    type: entity
+    table: ejercicios
+    indexes:
+        idx_asiento_apertura:
+            columns:
+                - asiento_apertura_id
+        idx_asiento_cierre:
+            columns:
+                - asiento_cierre_id
+        idx_asiento_regularizacion:
+            columns:
+                - asiento_regularizacion_id
+        idx_estado_ejercicio:
+            columns:
+                - estado_ejercicio_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        fcini:
+            type: date
+            nullable: true
+        fcfin:
+            type: date
+            nullable: true
+        
+    manyToOne:
+        asientoApertura:
+            targetEntity: Asiento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asiento_apertura_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        asientoCierre:
+            targetEntity: Asiento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asiento_cierre_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        asientoRegularizacion:
+            targetEntity: Asiento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asiento_regularizacion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        estadoEjercicio:
+            targetEntity: EstadoEjercicio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_ejercicio_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

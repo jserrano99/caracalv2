@@ -1,0 +1,42 @@
+{% extends "GestionBundle::menu.html.twig" %} 
+{% block titulo %} ENVIO MASIVO DE CORREOS {% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addCorreo")}}" class="btn btn-success">Nuevo Correo</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Fecha Envio</th>
+                    <th class="text-center text-bold">Asunto</th>
+					<th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Correo in Correos %}
+                    <tr>
+                        <td class="text-center">{{Correo.id}}</td>
+						<td class="text-center">{{Correo.asunto}}</td>
+						<td class="text-center">{{Correo.estadoCorreo.estado}}</td>
+						<td class="text-center"> 
+                             <a href="{{path('editCorreo',{ "id":Correo.id })}}" 
+                               class="btn btn-success">Editar
+                            </a>
+                            <a href="{{path("deleteCorreo",{ "id":Correo.id })}}" 
+                               class="btn btn-danger">Eliminar
+                            </a>
+                      
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

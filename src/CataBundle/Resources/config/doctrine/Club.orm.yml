@@ -1,0 +1,36 @@
+CataBundle\Entity\Club:
+    type: entity
+    table: club
+    repositoryClass: CataBundle\Repository\ClubRepository
+    indexes:
+        idx_federacion:
+            columns:
+                - federacion_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripcion:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        federacion:
+            targetEntity: Federacion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                federacion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

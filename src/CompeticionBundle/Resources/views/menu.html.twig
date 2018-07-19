@@ -1,0 +1,8 @@
+{% extends "GestionBundle::layout.html.twig" %} 
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path("gestion_homepage")}}">Menu Principal</a></li>
+        <li><a href="{{path("queryCompeticion")}}">Consulta</a></li>
+        <li><a href="{{path("addCompeticion")}}">Nueva  Competicion</a></li>
+    </ul>    
+{%endblock%}                                    

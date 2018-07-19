@@ -1,0 +1,17 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PARTICIPANTES: {{Competicion.descripcion}}  ALTA PARTICIPANTE
+<a href="{{path("queryPersona")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

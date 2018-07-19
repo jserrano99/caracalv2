@@ -1,0 +1,47 @@
+<script>
+    function EliminarAsiento(id) {
+            bootbox.confirm("Confirmar el Eliminar Asiento " + id, 
+                 function(result){
+                     if (result) {
+                        var url =Routing.generate("deleteAsiento",{"id":id},true);
+                        window.location = url;                     
+                    } 
+                 });
+    }
+    
+    function EliminarProyecto(id) {
+            bootbox.confirm("Confirmar el Eliminar Proyecto " + id, 
+                 function(result){
+                     if (result) {
+                        var url =Routing.generate("deleteProyecto",{"id":id},true);
+                        window.location = url;
+                    } 
+                 });
+    }
+    function EliminarProveedoro(id) {
+            bootbox.confirm("Confirmar el Eliminar Proveedor " + id, 
+                 function(result){
+                     if (result) {
+                        var url =Routing.generate("deleteProveedor",{"id":id},true);
+                        window.location = url;
+                    } 
+                 });
+    }
+    function CerrarEjercicio(id) {
+            bootbox.confirm("Confirmar el Cierre de Ejercicio " + id, 
+                 function(result){
+                     if (result) {
+                        var url =Routing.generate("cierreEjercicio",{"id":id},true);
+                        window.location = url;                     } 
+                 });
+    }
+    function RenumeraAsientos(id) {
+            bootbox.confirm("Confirmar la renumeración de Asientos para el Ejercicio " + id, 
+                 function(result){
+                     if (result) {
+                        var url =Routing.generate("renumeraAsiento",{"ejercicio_id":id},true);
+                        window.location = url;                     } 
+                 });
+    }
+</script>
+

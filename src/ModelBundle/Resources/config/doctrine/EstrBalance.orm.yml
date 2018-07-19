@@ -1,0 +1,59 @@
+ModelBundle\Entity\EstrBalance:
+    type: entity
+    table: estr_balance
+    indexes:
+        idx_cuenta_mayor:
+            columns:
+                - cuenta_mayor_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nivel0:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        nivel1:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        nivel2:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        nivel3:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        nivel4:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        multiplicador:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    manyToOne:
+        cuentaMayor:
+            targetEntity: CuentasMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuenta_mayor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

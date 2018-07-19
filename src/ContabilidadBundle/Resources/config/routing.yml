@@ -1,0 +1,150 @@
+libroMayor:
+    path: /Contabilidad/Informes/LibroMayor/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:LibroMayor, ejercicio_id: null}
+libroDiario:
+    path: /Contabilidad/Informes/LibroDiario/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:LibroDiario, ejercicio_id: null}
+repBalance:
+    path: /Contabilidad/Informes/Balance/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Balance, ejercicio_id: null}
+repCuentaResultados:
+    path: /Contabilidad/Informes/CuentaResultados/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:CuentaResultados, ejercicio_id: null}
+saldosCuentaMayor:
+    path: /Contabilidad/Informes/SaldosCuentaMayor/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:SaldosCuentaMayor, ejercicio_id: null}
+    
+     
+apuntesCuentaMayor:
+    path: /Contabilidad/CuentaMayor/Apuntes/{id}/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:CuentaMayor:Apuntes, ejercicio_id: null}
+addCuentaMayor:
+    path: /Contabilidad/CuentaMayor/Add
+    defaults: {_controller: ContabilidadBundle:CuentaMayor:Add}
+editCuentaMayor:
+    path: /Contabilidad/CuentaMayor/Edit/{id}
+    defaults: {_controller: ContabilidadBundle:CuentaMayor:Edit}
+deleteCuentaMayor:
+    path: /Contabilidad/CuentaMayor/Delete/{id}
+    defaults: {_controller: ContabilidadBundle:CuentaMayor:Delete}
+    options:
+        expose: true
+queryCuentaMayor:
+    path: /Contabilidad/CuentaMayor/Query
+    defaults: {_controller: ContabilidadBundle:CuentaMayor:Query}
+
+resumenProyecto:
+    path: /Contabilidad/Proyecto/Resumen/{id}
+    defaults: {_controller: ContabilidadBundle:Proyecto:resumen}
+queryProyecto:
+    path: /Contabilidad/Proyecto/Query
+    defaults: {_controller: ContabilidadBundle:Proyecto:Query}
+addProyecto:
+    path: /Contabilidad/Proyecto/Add
+    defaults: {_controller: ContabilidadBundle:Proyecto:Add}
+editProyecto:
+    path: /Contabilidad/Proyecto/Edit/{id}
+    defaults: {_controller: ContabilidadBundle:Proyecto:Edit}
+deleteProyecto:
+    path: /Contabilidad/Proyecto/Delete/{id}
+    defaults: {_controller: ContabilidadBundle:Proyecto:Delete}
+    options:
+        expose: true
+
+resumenProveedor:
+    path: /Contabilidad/Proveedor/Resumen/{id}
+    defaults: {_controller: ContabilidadBundle:Proveedor:resumen}
+queryProveedor:
+    path: /Contabilidad/Proveedor/Query
+    defaults: {_controller: ContabilidadBundle:Proveedor:Query}
+addProveedor:
+    path: /Contabilidad/Proveedor/Add
+    defaults: {_controller: ContabilidadBundle:Proveedor:Add}
+editProveedor:
+    path: /Contabilidad/Proveedor/Edit/{id}
+    defaults: {_controller: ContabilidadBundle:Proveedor:Edit}
+deleteProveedor:
+    path: /Contabilidad/Proveedor/Delete/{id}
+    defaults: {_controller: ContabilidadBundle:Proveedor:Delete}
+    options:
+        expose: true
+
+addApunte:
+    path: /Contabilidad/Apunte/Add/{asiento_id}
+    defaults: {_controller: ContabilidadBundle:Apunte:Add}
+editApunte:
+    path: /Contabilidad/Apunte/Edit/{id}
+    defaults: {_controller: ContabilidadBundle:Apunte:Edit}
+deleteApunte:
+    path: /Contabilidad/Apunte/Delete/{id}
+    defaults: {_controller: ContabilidadBundle:Apunte:Delete}
+    options:
+        expose: true
+queryApunte:
+    path: /Contabilidad/Apunte/Query/{asiento_id}
+    defaults: {_controller: ContabilidadBundle:Apunte:Query}
+
+
+addAsientoFactura:
+    path: /Contabilidad/AsientoFactura/Add
+    defaults: {_controller: ContabilidadBundle:AsientoFactura:Add}
+addAsientoTraspaso:
+    path: /Contabilidad/AsientoTraspaso/Add
+    defaults: {_controller: ContabilidadBundle:AsientoTraspaso:Add}
+addAsientoGasto:
+    path: /Contabilidad/AsientoGasto/Add
+    defaults: {_controller: ContabilidadBundle:AsientoGasto:Add}
+addAsientoIngreso:
+    path: /Contabilidad/AsientoIngreso/Add
+    defaults: {_controller: ContabilidadBundle:AsientoIngreso:Add}
+addAsientoGenerico:
+    path: /Contabilidad/AsientoGenerico/Add
+    defaults: {_controller: ContabilidadBundle:AsientoGenerico:Add}
+addAsientoIVA:
+    path: /Contabilidad/AsientoIVA/Add/{id}
+    defaults: {_controller: ContabilidadBundle:AsientoIVA:Add,id:null}
+
+editAsiento:
+    path: /Contabilidad/Asiento/Edit/{id}/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Asiento:Edit}
+deleteAsiento:
+    path: /Contabilidad/Asiento/Delete/{id}
+    defaults: {_controller: ContabilidadBundle:Asiento:Delete}
+    options:
+        expose: true
+queryAsiento:
+    path: /Contabilidad/Asiento/Query/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Asiento:Query, ejercicio_id: null }
+    
+renumeraAsiento:
+    path: /Contabilidad/Ejercicio/Renumera/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:RenumeraAsientos}
+    options:
+        expose: true
+
+estableceEjercicio:
+    path: /Contabilidad/Ejercicio/Actual/{ejercicio_id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Actual}
+    
+aperturaEjercicio:
+    path: /Contabilidad/Ejercicio/Apertura/{id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Apertura}
+cierreEjercicio:
+    path: /Contabilidad/Ejercicio/Cierre/{id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Cierre}
+    options:
+        expose: true
+addEjercicio:
+    path: /Contabilidad/Ejercicio/Add
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Add}
+editEjercicio:
+    path: /Contabilidad/Ejercicio/Edit/{id}
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Edit}
+queryEjercicio:
+    path: /Contabilidad/Ejercicio/Query
+    defaults: {_controller: ContabilidadBundle:Ejercicio:Query}
+    
+contabilidad_homepage:
+    path: /Contabilidad
+    defaults: { _controller: ContabilidadBundle:Contabilidad:index }
+  

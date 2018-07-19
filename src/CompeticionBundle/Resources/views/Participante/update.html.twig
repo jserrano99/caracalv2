@@ -1,0 +1,16 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PARTICIPANTE: {{Participante.arquero.persona.apenom}}
+   <a href="{{path("queryParticipante",{"competicion_id":Participante.competicion.id})}}" class="btn btn-success">Volver</a>
+   <br/>
+   <a href="{{path("editArquero",{"id":Participante.arquero.id})}}" target="_blank" class="btn btn-success">Arquero</a>
+   <a href="{{path("editPersona",{"id":Participante.arquero.persona.id})}}" target="_blank" class="btn btn-success">Datos Personales</a>
+   
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

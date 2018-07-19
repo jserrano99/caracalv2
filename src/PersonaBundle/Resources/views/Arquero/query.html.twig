@@ -1,0 +1,47 @@
+{% extends "PersonaBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE AQUEROS: CONSULTA{% endblock %}
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addArquero")}}" class="btn btn-success">Alta Arquero</a>
+        <a href="{{path("addPersona")}}" class="btn btn-success">Nueva Persona</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+					<th class="text-center text-bold">Licencia</th>
+					<th class="text-center text-bold">Nombre</th>
+					<th class="text-center text-bold">Club</th>
+					<th class="text-center text-bold">Categoría</th>
+					<th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Arquero in Arqueros %}
+                    <tr>
+                        <td class="text-center">{{Arquero.id}}</td>
+                        <td class="text-center">{{Arquero.licencia}}</td>
+                        <td>{{Arquero.persona.apenom}}</td>
+                        <td>{{Arquero.club.descripcion}}</td>
+						{% if (Arquero.categoria != null ) %}
+							<td>{{Arquero.categoria.descripcion}}</td>
+						{% else %}
+							<td></td>
+                        {% endif %}
+                        <td class="text-center">
+						   <a href="{{path("editArquero",{ "id":Arquero.id })}}" class="btn btn-success">Editar Arquero</a>
+						   <a href="{{path("deleteArquero",{ "id":Arquero.id })}}" class="btn btn-danger">Eliminar Arquero</a>
+						   <a href="{{path("editPersona",{ "id":Arquero.persona.id })}}" class="btn btn-success">Editar Persona</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

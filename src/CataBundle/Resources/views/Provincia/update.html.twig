@@ -1,0 +1,12 @@
+{% extends "CataBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PROVINCIAS: MODIFICACIÓN 
+   <a href="{{path("queryProvincia")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

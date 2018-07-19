@@ -1,0 +1,55 @@
+ModelBundle\Entity\CuentaResultados:
+    type: entity
+    table: cuenta_resultados
+    indexes:
+        idx_cuenta_mayor:
+            columns:
+                - cuenta_mayor_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    fields:
+        nivel1:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nivel1
+        nivel2:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nivel2
+        nivel3:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        multiplicador:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    manyToOne:
+        cuentaMayor:
+            targetEntity: CuentasMayor
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cuenta_mayor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

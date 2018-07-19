@@ -1,0 +1,49 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE PARTICIPANTES:  {{Competicion.descripcion}} 
+		<a href="{{path("queryCompeticion")}}" class="btn btn-info">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+		<a href="{{path("filtroArqueros",{ "competicion_id":Competicion.id })}}" class="btn btn-success">Alta Participante</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+					<th class="text-center text-bold">Licencia</th>
+                    <th class="text-center text-bold">Dorsal</th>
+                    <th class="text-center text-bold">Nombre</th>
+				    <th class="text-center text-bold">Club</th>
+					<th class="text-center text-bold">Categoría</th>
+					<th class="text-center text-bold">Modalidad</th>
+					<th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Participante in Participantes %}
+                    <tr>
+                        <td class="text-center">{{Participante.id}}</td>
+						<td class="text-center">{{Participante.licencia}}</td>
+						<td class="text-center">{{Participante.dorsal}}</td>
+						<td>{{Participante.apenom}}</td>
+                        <td>{{Participante.club}}</td>
+						<td>{{Participante.categoria}}</td>
+						<td>{{Participante.modalidad}}</td>
+                        <td class="text-center">
+                           <a href="{{path("editParticipante",{ "id":Participante.id,"competicion_id":Competicion.id})}}" 
+								   " class="btn btn-success">Editar</a>
+					       <a href="{{path("deleteParticipante",{ "id":Participante.id,"competicion_id":Competicion.id})}}" 
+								   class="btn btn-danger">Eliminar</a>
+						</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

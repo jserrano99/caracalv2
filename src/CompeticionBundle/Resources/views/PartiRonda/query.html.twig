@@ -1,0 +1,60 @@
+{% extends "CompeticionBundle::menu.html.twig" %} 
+{% block titulo %} GESTIÓN DE RONDAS PARTICIPANTES:  {{Ronda.competicion.descripcion}}
+	 <br/>
+	 {{Ronda.descripcion}} 
+	<hr/>
+   <a href="{{path("queryRonda",{"competicion_id":Ronda.competicion.id})}}" class="btn btn-success">Volver</a>
+   <a href="{{path("exportarParticipantes",{"id":Ronda.id})}}" class="btn btn-warning">Exportar</a>
+   <a href="{{path("cargaPuntuacion",{"id":Ronda.id})}}" class="btn btn-info">Puntuaciones</a>
+   <a href="{{path("inscritosRonda",{"ronda_id":Ronda.id})}}" target="_blank" class="btn btn-info">Inscritos</a>
+   <a href="{{path("tablillaPuntuacion",{"ronda_id":Ronda.id})}}" target="_blank" class="btn btn-info">Tablillas</a>
+{% endblock %}
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Dorsal</th>
+                    <th class="text-center text-bold">Nombre</th>
+				    <th class="text-center text-bold">Categoria</th>
+					<th class="text-center text-bold">Modalidad</th>
+					<th class="text-center text-bold">Inscrito</th>
+					<th class="text-center text-bold">Pagado</th>
+					<th class="text-center text-bold">Puntos</th>
+					<th class="text-center text-bold">11's</th>
+					<th class="text-center text-bold">10's</th>
+					<th class="text-center text-bold">Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for PartiRonda in ParticipantesRonda %}
+                    <tr>
+                        <td class="text-center">{{PartiRonda.partiRonda_id}}</td>
+						<td class="text-center" >{{PartiRonda.dorsal}}</td>
+                    	<td>{{PartiRonda.apenom}}</td>
+                        <td>{{PartiRonda.categoria}}</td>
+						<td>{{PartiRonda.modalidad}}</td>
+						<td class="text-center">{{PartiRonda.inscrito}}</td>					
+						<td class="text-center">{{PartiRonda.pagado}}</td>					
+						<td class="text-center">{{PartiRonda.puntos}}</td>					
+						<td class="text-center">{{PartiRonda.onces}}</td>					
+						<td class="text-center">{{PartiRonda.dieces}}</td>	
+						<td class="text-center">
+							<a href="{{path("editPartiRonda",{"partiRonda_id":PartiRonda.partiRonda_id,
+															  "ronda_id":Ronda.id})}}" class="btn btn-success">Editar</a>
+						</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

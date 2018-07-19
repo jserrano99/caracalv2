@@ -1,0 +1,12 @@
+<script>
+    function EliminarCompeticion(id) {
+        bootbox.confirm(" ¿Eliminar Competición : "+id+ " ?", 
+            function(result){
+                if (result) {
+                     var url =Routing.generate("deleteCompeticion",{"id":id},true);
+                     window.location = url;
+                 }
+             }
+        );
+    }
+</script>
